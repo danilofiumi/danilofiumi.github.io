@@ -1,60 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-    <title>Prova</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hpcc-js/common/font-awesome/css/font-awesome.min.css">
+<!doctype html>
+<html>
 
-    <link rel="stylesheet" href="/style.css">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hpcc-js/common/font-awesome/css/font-awesome.min.css">
+   
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
 
     <style>
-      figure,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      p,
-      table {
-        max-width: 100%;
-      }
-      body {
+        
+        figure,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        table {
+            max-width:100%;
+        }
+    body {
         padding: 0px;
         margin: 8px;
         background: white;
         color: black;
-      }
-      #placeholder {
+    }
+    #placeholder {
         position: absolute;
         left: 8px;
         top: 8px;
         right: 8px;
         bottom: 8px;
         max-width: 100%;
-      }
+    }
     </style>
-    <script
-      src="/index.full.js"
-      type="text/javascript"
-      charset="utf-8"
-    ></script>
+    <script src="/index.full.js" type="text/javascript" charset="utf-8"></script>
     <script>
-      var omdMod = window["@hpcc-js/observable-md"];
+        var omdMod = window["@hpcc-js/observable-md"]
     </script>
-  </head>
 
-  <body onresize="doResize()">
-    <div id="placeholder"></div>
+</head>
+
+<body onresize="doResize()">
+    <div id="placeholder">
+    </div>
     <script>
-      var app = new omdMod.Observable()
-        .target("placeholder")
-        .showValues(false)
-        .mode("ojs").text(`md\`
+        var app = new omdMod.Observable()
+            .target("placeholder")
+            .showValues(false)
+            .mode("ojs")
+            .text(`md\`
 # iterazione 2 Gdoc
 \`;
 
@@ -289,17 +286,21 @@ tmp2 = clean_style(tmp1, ["height:0pt"],"")
 tmp3 = clean_style(tmp2, border_rm,"")
 data=clean_style(clean_style(tmp3,minor,"<"),major,">")
 
-`);
+`)
 
-      doResize();
+            ;
 
-      function doResize() {
+        doResize();
+
+        function doResize() {
         if (app) {
-          app.resize().lazyRender();
+            app
+                .resize()
+                .lazyRender()
+                ;
         }
-      }
+    }
     </script>
-  </body>
-  </html>
+</body>
 
-
+</html>
