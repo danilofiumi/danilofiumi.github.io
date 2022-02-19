@@ -1,0 +1,138 @@
+@charset "utf-8";
+
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Source+Serif+Pro:wght@300;400;600;700&family=Ubuntu+Mono:wght@400;700&display=swap');
+// Set your brand colors
+$yellow: #FFCB02;
+$black: #282828;
+$grey-dark: #3b3b3b;
+$grey-light: #d1d3d4;
+$white: #ffffff;
+
+$pink: #FA7C91;
+$brown: #757763;
+$beige-light: #D0D1CD;
+$beige-lighter: #EFF0EB;
+
+// Update Bulma's global variables
+$family-primary: "Inter", sans-serif;
+$family-secondary: "Source Serif Pro", serif;
+$family-sans-serif: "Poppins", sans-serif;
+$family-monospace: "Ubuntu Mono", monospace;
+
+$primary: $yellow;
+//$link: $pink;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+// Update some of Bulma's component variables
+//$body-background-color: $beige-lighter;
+$control-border-width: 2px;
+//$input-border-color: transparent;
+//$input-shadow: none;
+
+$footer-background-color: $black;
+
+// test
+
+
+.navbar-item.navbar-center {
+    flex-grow: 1;
+    flex-direction: column; 
+    justify-content: center;
+}
+
+.is-form {
+    border: 1px solid $grey-light !important;
+    border-radius: 0 !important;
+}
+
+.is-button-form {
+    border: 1px solid $black !important;
+    background-color: $white;
+    border-radius: 0 !important;
+    box-shadow: 3px 3px $white,
+                4px 4px $black,
+                4px 2px $black,
+                2px 4px $black !important;
+}
+
+.is-divider {
+    display: block;
+    position: relative;
+    border-top: .1rem solid $grey-light;
+    height: .1rem;
+    text-align: center;
+}
+
+.has-left-line {
+    border-right: 3px solid $yellow;
+}
+
+.has-right-line {
+    border-left: 3px solid $yellow;
+}
+
+// .has-border {
+//     //border-bottom: 1px solid $black;
+// }
+
+.vl {
+    border-left: 3px solid $yellow;
+    height: 20;
+}
+
+.mark-yellow {
+    background-color: $yellow;
+    color: $black;
+}
+
+.mark-black {
+    background-color: $black;
+    color: white;
+}
+
+.card-box {
+    @extend .card;
+    border: 1px solid $black !important;
+    //background-color: $white;
+    border-radius: 0px !important;
+    box-shadow: -5px -5px $black !important;
+}
+
+.card-form {
+    background-color: $beige-light;
+    border: 0px;
+}
+
+.card-title { 
+    background-color: $grey-dark;
+}
+
+.partial-colored {
+    background: linear-gradient(to bottom, $primary, $primary 65%, white 35%, white);
+}
+
+// Custom CSS
+
+
+
+// Import only what you need from Bulma
+@import "./bulma/sass/grid/_all.sass";
+
+@import "./bulma/sass/utilities/_all.sass";
+
+@import "./bulma/sass/base/_all.sass";
+
+@import "./bulma/sass/elements/_all.sass";
+
+@import "./bulma/sass/form/_all.sass";
+
+@import "./bulma/sass/components/navbar.sass";
+@import "./bulma/sass/components/card.sass";
+
+@import "./bulma/sass/layout/section.sass";
+@import "./bulma/sass/layout/hero.sass";
+@import "./bulma/sass/layout/footer.sass";
+
+@import "./bulma/sass/helpers/_all.sass";   
