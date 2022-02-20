@@ -1,62 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-    <title>Prova</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hpcc-js/common/font-awesome/css/font-awesome.min.css">
+<!doctype html>
+<html>
 
-    <link rel="stylesheet" href="/style.css">
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hpcc-js/common/font-awesome/css/font-awesome.min.css">
+   
+<link rel="stylesheet" href="/style.css">
 
     <style>
-      figure,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6,
-      p,
-      table {
-        max-width: 100%;
-      }
-      body {
+
+    body {
         padding: 0px;
         margin: 8px;
         background: white;
         color: black;
-      }
-      #placeholder {
+    }
+    #placeholder {
         position: absolute;
         left: 8px;
         top: 8px;
         right: 8px;
         bottom: 8px;
         max-width: 100%;
-      }
+    }
     </style>
-    <script
-      src="/index.full.js"
-      type="text/javascript"
-      charset="utf-8"
-    ></script>
+    <script src="/index.full.js" type="text/javascript" charset="utf-8"></script>
     <script>
-      var omdMod = window["@hpcc-js/observable-md"];
+        var omdMod = window["@hpcc-js/observable-md"]
     </script>
-  </head>
 
-  <body onresize="doResize()">
-    <div id="placeholder"></div>
+</head>
+
+<body onresize="doResize()">
+    <div id="placeholder" class="is-paddingless-mobile p-6">
+    </div>
     <script>
-      var app = new omdMod.Observable()
-        .target("placeholder")
-        .showValues(false)
-        .mode("ojs").text(`md\`
-# iterazione 2 Gdoc
-\`;
+        var app = new omdMod.Observable()
+            .target("placeholder")
+            .showValues(false)
+            .mode("ojs")
+            .text(`
 
 
 link = "https://docs.google.com/document/d/1Xei5mvgUIb-KXS2aMA-RGuSf2_nyqJYba_3HiUyQb8I/edit?usp=sharing"
@@ -69,8 +53,6 @@ sdata2 = {
   );
 }
 
-
-
 (el.innerHTML = data)
 
 el = {
@@ -80,7 +62,7 @@ el = {
 
 el.setAttribute("id", "testid")
 
-el.setAttribute("class", "p-6")
+<!-- el.setAttribute("class", "p-6") -->
 
 /* generator(data, el.getElementsByTagName("img")[0].getAttribute("src")) */
 
@@ -92,13 +74,16 @@ el.setAttribute("class", "p-6")
 
 /* abcElements[13].tagName */
 
+
+<!--  -->
+<!-- utilities -->
 function add_ids(sdata2) {
   var abcElements = \$("#testid > *").each(function () {
     return alert.value;
   });
   for (var i = 0; i < abcElements.length; i++) abcElements[i].id = "abc-" + i;
 }
-<!--  -->
+
 
 
 function change_element(asis, tobe) {
@@ -145,7 +130,7 @@ function fix_table() {
           document.createElement(tobe)
         );
       }
-      table[f].children[h].classList.add("content");
+      table[f].children[h].classList.add("p-0");
       change_element(table[f].children[h], document.createElement(tobe));
     }
     table[f].classList.add("p-0");
@@ -177,6 +162,9 @@ function* generator(variab, elem) {
     massive_change(el.getElementsByTagName("p"), "div");
   };
   for (let index = 0; index < 10; ++index) {
+    massive_change(el.getElementsByTagName("h6"), "div");
+  }
+  for (let index = 0; index < 10; ++index) {
     fix_table();
   };
   add_ids(data);
@@ -185,17 +173,6 @@ function* generator(variab, elem) {
 
 
 <!--  -->
-
-/* change_element(
-  document.getElementsByTagName("p")[0],
-  document.createElement("div")
-) */
-
-\$ = require("jquery")
-
-
-
-str = "border-bottom-width: 1pt;width: 437.8pt;border-top-color: #ffffff;"
 
 regexp = /(height)/gi
 
@@ -275,6 +252,15 @@ minor = {
     }
     return fruits;
   }
+  quotes = {
+    var d = remove_style(/(&quot;)/gi, "&quot", ";");
+    var fruits = [];
+    for (const value of d) {
+      fruits.push(value + ";");
+    }
+    return fruits;
+  }
+  <!-- padding_rm = remove_style(/(padding-)/gi, "padding", ";") -->
 
 function clean_style(_string, list,replace) {
   for (let dd = 0; dd < list.length; ++dd) {
@@ -283,23 +269,97 @@ function clean_style(_string, list,replace) {
   return _string;
 }
 
-tmp1 = clean_style(sdata2, wdt)
+function the_cleaner_sc(sdata2) {
+    var tmp1 = clean_style(
+      clean_style(clean_style(sdata2, minor, "<"), major, ">"),
+      quotes,
+      '"'
+    );
+    return tmp1;
+  }
 
-tmp2 = clean_style(tmp1, ["height:0pt"],"")
-tmp3 = clean_style(tmp2, border_rm,"")
-data=clean_style(clean_style(tmp3,minor,"<"),major,">")
+  function the_cleaner(sdata2) {
+    var tmp1 = clean_style(
+      clean_style(
+        clean_style(
+          clean_style(
+            clean_style(clean_style(sdata2, wdt, ""), ["height:0pt"], ""),
+            border_rm,
+            ""
+          ),
+          minor,
+          "<"
+        ),
+        major,
+        ">"
+      ),
+      quotes,
+      '"'
+    );
+    return tmp1;
+  }
 
-`);
+h6 = remove_style(/(<h6)/gi, "<h6", "/h6>")
 
-      doResize();
+data = {
+    //inizio
+    var base = "";
+    var to_change1 = sdata2.substring(0, sdata2.indexOf(h6[0]));
+  
+    base = base.concat(the_cleaner(to_change1));
+  
+    function lp(base) {
+      for (let mm = 0; mm < h6.length - 1; ++mm) {
+        var safe = h6[mm];
+        var len_intermedia = safe.length;
+  
+        var to_change = sdata2.substring(
+          sdata2.indexOf(h6[mm]) + len_intermedia,
+          sdata2.indexOf(h6[mm + 1])
+        );
 
-      function doResize() {
+        base = base.concat(the_cleaner_sc(safe), the_cleaner(to_change));
+    }
+    return base;
+}
+    base = lp(base);
+  
+    //fine
+    var safe_row2 = h6[h6.length - 1];
+    var len_intermedia_f = safe_row2.length;
+  
+    var to_change3 = sdata2.substring(
+      sdata2.indexOf(safe_row2) + len_intermedia_f,
+      sdata2.length
+    );
+  
+    base = base.concat(the_cleaner_sc(safe_row2), the_cleaner(to_change3));
+  
+    return base;
+  }
+
+
+\$ = require("jquery")
+
+
+<!--  -->
+`)
+
+            ;
+
+        doResize();
+
+        function doResize() {
         if (app) {
-          app.resize().lazyRender();
+            app
+                .resize()
+                .lazyRender()
+                ;
         }
-      }
+    }
     </script>
-  </body>
-  </html>
+</body>
+
+</html>
 
 
