@@ -8,7 +8,13 @@
    
 <link rel="stylesheet" href="/style.css">
 
+<style>
+    .test{background: #FBFBFB;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 55px;}
+</style>
+
+
     <style>
+        
 
     body {
         padding: 0px;
@@ -21,7 +27,7 @@
         left: 8px;
         top: 8px;
         right: 8px;
-        bottom: 8px;
+        bottom: 8px; 
         max-width: 100%;
     }
     </style>
@@ -33,7 +39,7 @@
 </head>
 
 <body onresize="doResize()">
-    <div id="placeholder" class=" p-6 has-padding-mobile" >
+    <div id="placeholder" class="" >
     </div>
     <script>
         var app = new omdMod.Observable()
@@ -52,7 +58,7 @@ sdata2 = {
     link.substr(0, link.indexOf("/edit")) + "/export?format=html"
   );
 }
-
+ 
 (el.innerHTML = data)
 
 el = {
@@ -62,10 +68,12 @@ el = {
 
 el.setAttribute("id", "testid")
 
-<!-- el.setAttribute("class", "p-6") -->
+clss=["p-6", "has-padding-mobile"]
+
+el.setAttribute("class", "p-6 has-padding-mobile")
 
 
-/* generator(data, el.getElementsByTagName("img")[0].getAttribute("src")) */
+/* generator(data, el.getElementsByTagName("img")[0].getAttribuCte("src")) */
 
 /* el.getElementsByTagName("table") */
 
