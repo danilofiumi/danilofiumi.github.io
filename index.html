@@ -33,7 +33,7 @@
 </head>
 
 <body onresize="doResize()">
-    <div id="placeholder" class="is-paddingless-mobile p-6">
+    <div id="placeholder">
     </div>
     <script>
         var app = new omdMod.Observable()
@@ -62,7 +62,8 @@ el = {
 
 el.setAttribute("id", "testid")
 
-<!-- el.setAttribute("class", "p-6") -->
+el.setAttribute("class", "p-6")
+el.setAttribute("class", "is-paddingless-mobile")
 
 /* generator(data, el.getElementsByTagName("img")[0].getAttribute("src")) */
 
