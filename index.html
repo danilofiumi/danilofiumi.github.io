@@ -134,6 +134,7 @@ function fix_table() {
           );
         }
         table[f].children[h].children[z].classList.add(...classesToAddclms);
+        table[f].children[h].children[z].style.height="100%";
         change_element(
           table[f].children[h].children[z],
           document.createElement(tobe)
@@ -170,9 +171,7 @@ function* generator(variab, elem) {
   for (let index = 0; index < 10; ++index) {
     massive_change(el.getElementsByTagName("p"), "div");
   };
-  for (let index = 0; index < 10; ++index) {
-    massive_change(el.getElementsByTagName("h6"), "div");
-  }
+
   for (let index = 0; index < 10; ++index) {
     fix_table();
   };
@@ -305,6 +304,7 @@ function the_cleaner_sc(sdata2) {
       quotes,
       '"'
     );
+    
     return tmp1;
   }
 
