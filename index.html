@@ -412,7 +412,7 @@ data = {
   };
 
   src = find_image(/<img/g, "src=", '" style')
-
+  ref = find_image(/<a/g, "href=", ";")
 
 
   function clean_src(src) {
@@ -423,10 +423,19 @@ data = {
     return _src;
   };
 
+  function clean_ref(ref) {
+    var _ref = [];
+    for (const value of ref) {
+        _ref.push(value.slice(6, value.length));
+    }
+
+    return _ref;
+  };
+
   function icon(params) {
     var cliccable = document.getElementById("cliccabili" + params);
     if (cliccable !== null){
-    cliccable.href = ref[params];
+    cliccable.href = clean_ref(ref)[params];
     var img = cliccable.children[0];
     img.onload = function () {
       img.drawImage(img, 0, 0);
@@ -436,7 +445,7 @@ data = {
 }
 }
 
-ref = find_image(/<a/g, "href=", ";")
+
 
 
 {
