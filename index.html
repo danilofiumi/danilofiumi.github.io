@@ -1,49 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-    <title>Prova</title>
+<title>Prova</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hpcc-js/common/font-awesome/css/font-awesome.min.css">
-   
+
 <link rel="stylesheet" href="/style.css">
 
 <style>
-    .test{background: #FBFBFB;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 55px;}
+    .test {
+        background: #FBFBFB;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 55px;
+    }
+    
+    .clip {
+        clip-path: url(#clip);
+    }
+    
+    .clip:hover {
+        opacity: 0.5;
+    }
+
+    
 </style>
 
 
-    <style>
-        
-
+<style>
     body {
         padding: 0px;
         margin: 8px;
         background: white;
         color: black;
     }
+    
     #placeholder {
         position: absolute;
         left: 8px;
         top: 8px;
         right: 8px;
-        bottom: 8px; 
+        bottom: 8px;
         max-width: 100%;
     }
-    </style>
-    <script src="/index.full.js" type="text/javascript" charset="utf-8"></script>
-    <script>
-        var omdMod = window["@hpcc-js/observable-md"]
-    </script>
+</style>
+<script src="/index.full.js" type="text/javascript" charset="utf-8"></script>
+<script>
+    var omdMod = window["@hpcc-js/observable-md"]
+</script>
 
 </head>
 
 <body onresize="doResize()">
-    <div id="placeholder" class="" >
+    <div id="placeholder">
     </div>
+
+
+    <!-- 
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br>
+    <br><br>
+    <br>
+    <div class="columns">
+        <div class="column is-half">
+            <div class="pl-4 pr-4 has-text-centered" style="background: #FBFBFB;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 55px; padding-top: 85px !important; padding-bottom: 65px !important;"> <div class="columns  is-variable is-0-mobile is-6-tablet is-8-desktop is-8-widescreen is-2-fullhd is-centered is-multiline"> <div class="column is-inline-flex is-1 p-2"><a class="" id="cliccabili0"><img> </a></div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2 "> <a id="cliccabili1"><img> </a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili2"><img> </a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili3"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili4"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili5"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili6"><img class="mt-3"></a> </div> </div> <div class="columns  is-variable is-1-mobile is-6-tablet is-8-desktop is-8-widescreen is-2-fullhd is-centered "> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili7"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili8"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili9"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili10"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili11"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili12"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili13"><img></a> </div></div></div>
+
+        </div>
+    </div> -->
+
+
     <script>
         var app = new omdMod.Observable()
             .target("placeholder")
@@ -350,28 +379,89 @@ data = {
     return base;
   }
 
+  <!-- ----------------------------------------------------------------------- -->
+  <!--                                 custom                                  -->
+  <!-- ----------------------------------------------------------------------- -->
 
+
+  fetch_img = "https://docs.google.com/document/d/1tTU0_X-kBv_Ydg4x8v7LbgfW9E1sSUtmawL1ZbVEbAY/edit?usp=sharing"
+
+  df = {
+    return await d3.text(
+        fetch_img.substr(0, fetch_img.indexOf("/edit")) + "/export?format=html"
+    );
+  }
+  
+  
+  function find_image(regexp, start, end) {
+    var prl = [];
+    var array = [...df.matchAll(regexp)];
+    for (let cc = 0; cc < array.length; ++cc) {
+      prl.push(
+        extractword(
+          df.slice(array[cc]["index"], df.length),
+          start,
+          end
+        )[0]
+      );
+    }
+    return prl;
+  };
+
+  src = find_image(/<img/g, "src=", '" style')
+
+
+
+  function clean_src(src) {
+    var _src = [];
+    for (const value of src) {
+      _src.push(value.slice(5, value.length));
+    }
+    return _src;
+  };
+
+  function icon(params) {
+    var cliccable = document.getElementById("cliccabili" + params);
+    if (cliccable !== null){
+    cliccable.href = ref[params];
+    var img = cliccable.children[0];
+    img.onload = function () {
+      img.drawImage(img, 0, 0);
+    };
+  img.src = clean_src(src)[params];
+  img.classList.add("clip");
+}
+}
+
+ref = find_image(/<a/g, "href=", ";")
+
+
+{
+    await new Promise((r) => setTimeout(r, 1350));
+    for (let index = 0; index < (ref.length); ++index) {
+        icon(index);
+        
+      };
+}
+    
 \$ = require("jquery")
 
 
 <!--  -->
 `)
 
-            ;
+        ;
 
         doResize();
 
         function doResize() {
-        if (app) {
-            app
-                .resize()
-                .lazyRender()
-                ;
+            if (app) {
+                app
+                    .resize()
+                    .lazyRender();
+            }
         }
-    }
     </script>
 </body>
 
 </html>
-
-
