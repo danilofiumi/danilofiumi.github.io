@@ -26,6 +26,7 @@
         clip-path: url(#clip);
     }
     
+
     .clip:hover {
         opacity: 0.5;
     }
@@ -60,24 +61,221 @@
 
 <body onresize="doResize()">
     <div id="placeholder">
+<!--     
+
+<div class="columns has-text-centered">
+    <div class="column is-one-quarter has-text-centered">
+        <div class="has-text-centered"
+            style=" border-radius: 40px;">
+            <img style="height:185px" src="https://media-exp1.licdn.com/dms/image/C5622AQELfsJDH27brA/feedshare-shrink_800/0/1644480581434?e=1648684800&v=beta&t=iDD3G21lbRwqhHUnrRzT5sXyrho167vXFXAXCoG20pU" alt="" >
+            <div class="has-text-centered">prova di scrittura</div>
+        </div>
+    </div>
+    <div class="column is-one-quarter has-text-centered">
+        <div class="has-text-centered"
+            style=" border-radius: 40px;">
+            <img style="height:185px" src="https://media-exp1.licdn.com/dms/image/C5622AQELfsJDH27brA/feedshare-shrink_800/0/1644480581434?e=1648684800&v=beta&t=iDD3G21lbRwqhHUnrRzT5sXyrho167vXFXAXCoG20pU" alt="" >
+            <div class="has-text-centered">prova di scrittura</div>
+        </div>
+    </div>
+    <div class="column is-one-quarter has-text-centered">
+        <div class="has-text-centered">
+            <a>
+            <img style="height:185px; border-radius: 40px;" src="https://www.klarna.com/assets/sites/13/2019/12/03114336/rita-1.jpg" alt="" >
+            <div class="has-text-centered">prova di scrittura</div>
+            <div class="has-text-centered is-size-7">Feb 25, 2022</div>
+            </a>
+        </div>
     </div>
 
 
-    <!-- 
-    <br><br><br><br><br><br><br><br><br><br><br><br><br>
-    <br><br><br><br><br>
-    <br><br>
-    <br>
-    <div class="columns">
-        <div class="column is-half">
-            <div class="pl-4 pr-4 has-text-centered" style="background: #FBFBFB;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 55px; padding-top: 85px !important; padding-bottom: 65px !important;"> <div class="columns  is-variable is-0-mobile is-6-tablet is-8-desktop is-8-widescreen is-2-fullhd is-centered is-multiline"> <div class="column is-inline-flex is-1 p-2"><a class="" id="cliccabili0"><img> </a></div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2 "> <a id="cliccabili1"><img> </a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili2"><img> </a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili3"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili4"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili5"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili6"><img class="mt-3"></a> </div> </div> <div class="columns  is-variable is-1-mobile is-6-tablet is-8-desktop is-8-widescreen is-2-fullhd is-centered "> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili7"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili8"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili9"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili10"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili11"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili12"><img></a> </div> <p class="is-inline-flex" style="width:1%"></p> <div class="column is-inline-flex is-1 p-2"> <a id="cliccabili13"><img></a> </div></div></div>
 
+
+
+
+
+    
+    <div class="column is-one-quarter has-text-centered">
+        <div class="has-text-centered"
+            style=" border-radius: 40px;">
+            <img style="height:185px" src="https://media-exp1.licdn.com/dms/image/C5622AQELfsJDH27brA/feedshare-shrink_800/0/1644480581434?e=1648684800&v=beta&t=iDD3G21lbRwqhHUnrRzT5sXyrho167vXFXAXCoG20pU" alt="" >
+            <div class="has-text-centered">prova di scrittura</div>
         </div>
-    </div> -->
+    </div>    
+</div> -->
+
+
+  
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
 
 
     <script>
         var app = new omdMod.Observable()
+            .target("placeholder")
+            .showValues(false)
+            .mode("ojs")
+            .text(`
+
+link = "https://docs.google.com/document/d/1PEy7Bfk_z5farrxHhU4tNbj8bX9pfI92Q_YTc5Psy6Q/edit?usp=sharing"
+sdata2 = {
+    return await d3.text(
+      link.substr(0, link.indexOf("/edit")) + "/export?format=html"
+    );
+  }
+
+  
+
+  ref={
+    var ref = find_all(/<a/g, "href=", ";");
+    var _ref = [];
+    for (const value of ref) {
+        _ref.push(value.slice(35, value.length-4));
+    }
+
+    return _ref;
+  }
+
+  
+  src= {
+    var src = find_all(/<img/g, "src=", '" style');
+    var _src = [];
+    for (const value of src) {
+      _src.push(value.slice(5, value.length));
+    }
+    return _src;
+  };
+
+span={
+    var span_ = find_all(/<span/g, ">", "<");
+    var span=[]
+    for (const value of span_) {
+  if (value!=">"){
+      span.push(value.slice(1,value.lenght))
+  }
+}return span}
+
+title = {
+    var title = [];
+    for (let index = 0; index < span.length; ++index) {
+      if (index % 2 != 1) {
+        title.push(span[index]);
+      }
+    }
+    return title;
+  }
+
+  date = {
+    var title = [];
+    for (let index = 0; index < span.length; ++index) {
+      if (index % 2 == 1) {
+        title.push(span[index]);
+      }
+    }
+    return title;
+  }
+
+
+<!-- ----------------------------------------------------------------------- -->
+<!--                               custom html                               -->
+<!-- ----------------------------------------------------------------------- -->
+
+
+function ptf(params) {
+    var cliccable = document.getElementById("portfolio");
+    if (cliccable !== null) {
+      var div = cliccable.appendChild(document.createElement("div"));
+      div.classList.add(...["column", "is-one-quarter", "has-text-centered"]);
+  
+      var div1 = div.appendChild(document.createElement("div"));
+      div1.classList.add("has-text-centered");
+      div1.style="height:80%;"
+      //a
+      var a = div1.appendChild(document.createElement("a"));
+      a.href = ref[params];
+      a.style="color:black; opacity:0.9"
+      //img
+      var img = a.appendChild(document.createElement("img"));
+      img.style="border-radius: 40px; height:185px;"
+      img.src = src[params];
+      img.classList.add("clip");
+      
+  
+      //div
+      var div_title = a.appendChild(document.createElement("div"));
+      div_title.innerText = title[params];
+  
+      var div_date = a.appendChild(document.createElement("div"));
+      div_date.innerText = date[params];
+      div_date.classList.add("is-size-7");
+    }
+  }
+
+{
+    {
+        await new Promise((r) => setTimeout(r, 1350));
+        for (let index = 0; index < (ref.length); ++index) {
+            ptf(index);
+            
+          };
+    }
+}
+
+
+  <!-- ----------------------------------------------------------------------- -->
+  <!--                                functions                                -->
+  <!-- ----------------------------------------------------------------------- -->
+  function find_all(regexp, start, end) {
+    var prl = [];
+    var array = [...sdata2.matchAll(regexp)];
+    for (let cc = 0; cc < array.length; ++cc) {
+      prl.push(
+        extractword(
+          sdata2.slice(array[cc]["index"], sdata2.length),
+          start,
+          end
+        )[0]
+      );
+    }
+    return prl;
+  }
+  function extractword(str, start, end) {
+    var startindex = str.indexOf(start);
+    var endindex = str.indexOf(end, startindex);
+    const fruits = [];
+    if (startindex != -1 && endindex != -1 && endindex > startindex)
+      fruits.push(str.substring(startindex, endindex));
+    return fruits;
+  }
+`)
+            ;
+
+        doResize();
+
+        function doResize() {
+        if (app) {
+            app
+                .resize()
+                .lazyRender()
+                ;
+        }
+    }
+    </script>
+
+    <script>
+        var app1 = new omdMod.Observable()
             .target("placeholder")
             .showValues(false)
             .mode("ojs")
@@ -426,7 +624,7 @@ data = {
   function clean_ref(ref) {
     var _ref = [];
     for (const value of ref) {
-        _ref.push(value.slice(6, value.length));
+        _ref.push(value.slice(35, value.length-4));
     }
 
     return _ref;
@@ -437,9 +635,7 @@ data = {
     if (cliccable !== null){
     cliccable.href = clean_ref(ref)[params];
     var img = cliccable.children[0];
-    img.onload = function () {
-      img.drawImage(img, 0, 0);
-    };
+
   img.src = clean_src(src)[params];
   img.classList.add("clip");
 }
@@ -467,8 +663,8 @@ data = {
         doResize();
 
         function doResize() {
-            if (app) {
-                app
+            if (app1) {
+                app1
                     .resize()
                     .lazyRender();
             }
