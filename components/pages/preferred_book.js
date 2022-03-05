@@ -172,7 +172,7 @@ function slide(params){ return \`<div class="slide">
             <div class=" is-inline-flex" style="margin-top: -4.5em;">
                 <div class=" is-inline-flex" style="margin-top: 2.5em;">
                     <div class="book"> 
-                    <a href=\${href[params]}>
+                    <a href=\${href[params+1]}>
                         <img class="clip book-img" src=\${src[params+1]} alt=""> 
                         </a>
                     </div>
