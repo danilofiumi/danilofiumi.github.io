@@ -18,20 +18,29 @@
             display: none;
         }
     }
-
+    
     .test {
         background: #FBFBFB;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         border-radius: 55px;
     }
-
+    
     .clip {
         clip-path: url(#clip);
     }
-
-
+    
     .clip:hover {
         opacity: 0.5;
+    }
+    
+    .resizer1 {
+        font-size: 100%;
+    }
+    
+    @media(min-width: 300px)and (max-width: 767px) {
+        .resizer1 {
+            font-size: 0%;
+        }
     }
 </style>
 
@@ -50,8 +59,6 @@
     
     #placeholder {
         max-width: 100%;
-        
-
     }
 </style>
 
@@ -64,6 +71,77 @@
 <!--  -->
 
 <body onresize="doResize()">
+<!-- 
+    <div class="columns">
+        <div class="column is-half">
+            <div class="pl-4 pr-4 has-text-centered resizer1" style="background: #FBFBFB;box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);border-radius: 55px; padding-top: 85px !important; padding-bottom: 65px !important; ">
+                <div class="columns &nbsp;is-variable is-0-mobile is-6-tablet is-8-desktop is-8-widescreen is-2-fullhd is-centered is-multiline">
+                    <div class="column is-inline-flex is-1 p-2">
+                        <a class="" id="cliccabili0" href="https://www.klarna.com/careers/life-at-klarna/how-to-nail-your-klarna-interview/"><img src="https://lh6.googleusercontent.com/wPVOqGF8xzVhFwbze3qwl3WEOkpdBZl-DzHnkG1hcZj5yu1g4y7cL2nOfqyFBbSfjNfN8EjcMcTiGNY34aWPNgL6xUyGwsC_F0aYmQKVU3uVwbYcrLkLW7H5roYNzf5_zw" class="clip"> </a>
+                    </div>
+                    <div style="width:1%" class="is-inline-flex"></div>
+                    <div class="column is-inline-flex is-1 p-2 ">
+                        <a id="cliccabili1" href="http://css-tricks.com"><img src="https://lh6.googleusercontent.com/yKLt5gXc4E4IZf8gPXUsiJxyNUa775pTyYFY5A9GlOoMpmvYUJvTeXkrd4vdfyn4oHl5_s3fq7KabvV13UZSOyJKlbFlo-nf6DzxkuIWR_EpbRCANNJ7n1dzY29o4-g99Q" class="clip"> </a>
+                    </div>
+                    <div style="width:1%" class=""></div>
+                    <div class="column is-inline-flex is-1 p-2">
+                        <a id="cliccabili2" href="http://css-tricks.com"><img src="https://lh3.googleusercontent.com/Lf3kurK6_wIBEq_bnj6ta0Lu7KCahYOm_iYbfr26BXk2BaR2QMn86y7qruzrNvdZRPb4oAWzY0P2mzGIYlX0WelJUFzTQyedycA0AxkCvCkCjYZ9ZyzDk7HiEGQ234R6ag" class="clip"> </a>
+                    </div>
+                    <div style="width:1%" class="is-inline-flex"></div>
+                    <div class="column is-inline-flex is-1 p-2">
+                        <a id="cliccabili3" href="http://css-tricks.com"><img src="https://lh5.googleusercontent.com/rmr7iZJEIjfu9dMMysovJXCHJyuz6MsOnjcgbwOebdaJXQsswz0M7k5D1KjNfpgUuXw9g_K2LWzdVpNy_cEsWJreb7jwlqDZnZ7gjYcQKNAIHWVzwo3cKsBxCoJiEQghbA" class="clip"></a>
+                    </div>
+                    <div style="width:1%" class=""></div>
+                    <div class="column is-inline-flex is-1 p-2">
+                        <a id="cliccabili4" href="http://css-tricks.com"><img src="https://lh6.googleusercontent.com/uiarg3Rcq7OBLOWv1v2ZmfrMUn-peW9gHjS_4B6mW74J4RK532_C6s3-p6-iu92JE8KR9XgTq--4OZ86NCyoMwm7BTA087l0JH0RskHtX7O4fKvjuZ9jUkhxpr5c1Lkpxw" class="clip"></a>
+                    </div>
+                    <div style="width:1%" class="is-inline-flex"></div>
+                    <div class="column is-inline-flex is-1 p-2">
+                        <a id="cliccabili5" href="http://css-tricks.com"><img src="https://lh5.googleusercontent.com/f_O6cQ7YZy4XyIjs2_gd8nMWiv88AKqLpbSWUbKCu8ZUbs967UjtbhNrxPlUvN2fZ-xt1o8yfhVXTWayNXMPp6XpG6UX99hd4dTwnUp7sz_hn4TCgjohSDSW1d0gxmwnxQ" class="clip"></a>
+                    </div>
+                    <div style="width:1%" class=""></div>
+                    <div class="column is-inline-flex is-1 p-2">
+                        <a id="cliccabili6" href="http://css-tricks.com"><img class="mt-3 clip" src="https://lh6.googleusercontent.com/loRVVnAY2r9PA3EJMJwlyTnmCuG-eVQnB0P0_kMsrQwhaKGTyYnNFeb3yTwbI3uSCkwDEbhA2WEY1ZBoMr9Na2UbOSu_XrIQuoChlyiYxTRnfjsL507pZItbAC6ootW2ig"></a>
+                    </div>
+                    <div style="width:1%" class="is-inline-flex"></div>
+                    <div class="column is-inline-flex is-1 p-2 is-hidden-desktop is-hidden-tablet is-hidden-widescreen">
+                        <a id="cliccabili13" href="https://drive.google.com/drive/folders/1f-3Gwk3g6m_cfC2D4uLP7oNJxSu8FAOl?ths%3Dtrue"><img src="https://lh5.googleusercontent.com/2usZOe0CEAss1sFkbZCOKpu-6buzHutjpNC_qDIbX0C2Gn8SrnRAaNl_fx3RfxH1PhSRAi1fNnQDLSlbxhSFx5Z_QhkT3dcLXpKus9x4JsRtso9azNm3JEPuCtE4EaKpmQ" class="clip"></a>
+                    </div>
+                </div>
+                <div class="columns &nbsp;is-variable is-1-mobile is-6-tablet is-8-desktop is-8-widescreen is-2-fullhd is-centered ">
+                    <div class="column is-inline-flex is-1 p-2">
+                        <a id="cliccabili7" href="http://css-tricks.com"><img src="https://lh5.googleusercontent.com/XnpziHQbVhVxZFalBTPvF6Ku7wIJUEvUdaWdCOirMXm8Tqvl0khLFCa39f3LM3bbslX-eYwZXE8Bauy6H0codprlWu-Tzo15v_PsR5op_oWqqVdRvj5GzC2DMahcRim1TQ" class="clip"></a>
+                    </div>
+                    <div style="width:1%" class="is-inline-flex"></div>
+                    <div class="column is-inline-flex is-1 p-2">
+                        <a id="cliccabili8" href="http://css-tricks.com"><img src="https://lh3.googleusercontent.com/n2ng4yGNL5RQCvXGJeGRYxOLzC7YFLbGVmA5ugM9D6wt1WbYhLM2ua1iL5a-Ng4kP6ihy4LrtsAX3HlnQMQjBt4BVRJKHUtnwRrOXk25IUKNdUBVV0yBF6I7PldbqfLL9g" class="clip"></a>
+                    </div>
+                    <div style="width:1%" class=""></div>
+                    <div class="column is-inline-flex is-1 p-2">
+                        <a id="cliccabili9" href="http://css-tricks.com"><img src="https://lh5.googleusercontent.com/jVFgXZH1KiriuFNOvtgJO6KfHnYMtoubhL7UzE_z-FGZY06QBTbe8FhjE3D9b9xNOgo86OwXNaFC7-Het4gPwtxlZJiXNCBqOugWxe3gtMOsiQYlSSjq9iaHNZguehDwrA" class="clip"></a>
+                    </div>
+                    <div style="width:1%" class="is-inline-flex"></div>
+                    <div class="column is-inline-flex is-1 p-2">
+                        <a id="cliccabili10" href="http://css-tricks.com"><img src="https://lh4.googleusercontent.com/dLcOfnb-Y-_oh4QB_5v0DnXmOEDAPoI37fd2GXp7pIv7oohiMtugdaziYqwLfl9stw1lRe7dTpum6u0F-0FC12RJgX6xVdB3vqt7Q_GwJJctV3qON8T4Ac_8jPxiUoElZw" class="clip"></a>
+                    </div>
+                    <div style="width:1%" class=""></div>
+                    <div class="column is-inline-flex is-1 p-2">
+                        <a id="cliccabili11" href="http://css-tricks.com"><img src="https://lh3.googleusercontent.com/XfhLDkY6T-14fJ5HaLecI7rYDhkFekQwlx1bfpKGyke4kU0ddljVhgWN6XwntfaOWatTY-teUa1Rsxf47CJoYxQhwHlFE6-Q7Wn5YE_gavbJXEO2G1zNTMBE23FBQvD1SA" class="clip"></a>
+                    </div>
+                    <div style="width:1%" class="is-inline-flex"></div>
+                    <div class="column is-inline-flex is-1 p-2">
+                        <a id="cliccabili12" href="http://css-tricks.com"><img src="https://lh3.googleusercontent.com/fQ5lmGSilDZOUPGgi4V0Fqsjh85-KhD6eVKMhIUZUEtkoDhFo9jAuVj2W_tGP2N6atPnruQZbl7_zy_DCZddCi6LzRlPs6QarLJ5aqAhLjlf2I5FPtuLVVW2mopxKejGnA" class="clip"></a>
+                    </div>
+                    <div style="width:1%" class=""></div>
+                    <div class="column is-inline-flex is-1 p-2 is-hidden-mobile">
+                        <a id="cliccabili13" href="https://drive.google.com/drive/folders/1f-3Gwk3g6m_cfC2D4uLP7oNJxSu8FAOl?ths%3Dtrue"><img src="https://lh5.googleusercontent.com/2usZOe0CEAss1sFkbZCOKpu-6buzHutjpNC_qDIbX0C2Gn8SrnRAaNl_fx3RfxH1PhSRAi1fNnQDLSlbxhSFx5Z_QhkT3dcLXpKus9x4JsRtso9azNm3JEPuCtE4EaKpmQ" class="clip"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+ -->
+
+
 
     <div class="columns has-text-centered-mobile pt-6 pl-6 pr-6">
         <div class="column is-2"><span class="pt-2 pb-2 pl-4 pr-4" style="backdrop-filter: blur(4px); border-radius:2.89px; background:#2F2C2C;color: white; font-size:9pt !important;">DF</span></div>
@@ -72,12 +150,12 @@
         <div class="column is-1"><a href="about.html" style="opacity: 0.7;color:black;font-size:14pt">About</a></div>
         <div class="column is-1"><a href="contatti.html" style="opacity: 0.7;color:black;font-size:14pt">Contatti</a></div>
     </div>
+    </div>
 
-    
     <div id="placeholder">
     </div>
 
-<div style="display:none" id="link">https://docs.google.com/document/d/1k8TnSZQmbUtL22PnVtk3z61o1uth9yEoS3C1bG-w5UU/edit?usp=sharing</div>
+    <div style="display:none" id="link">https://docs.google.com/document/d/1k8TnSZQmbUtL22PnVtk3z61o1uth9yEoS3C1bG-w5UU/edit?usp=sharing</div>
 
 
 
