@@ -1,4 +1,32 @@
 <!DOCTYPE html>
+<!-- 
+................................................
+................................................
+................................................
+................................................
+................................................
+................................................
+................................................
+................................................
+................................................
+............,,*//***,....,,*////**..............
+............,/#%///(#%(*,*(##(///*,.............
+............,*##,....,#&/*((/,..................
+............,/##,.....(%//(%%###/,..............
+............,*##,...,/##**((/,..................
+............,*(#((((((*,.,///,..................
+................................................
+................................................
+................................................
+................................................
+................................................
+................................................
+................................................
+................................................
+    ............................................    
+
+    check my profile on linkedin.com/in/danilofiumi/
+ -->
 <html lang="en">
 
 <head>
@@ -24,13 +52,21 @@
         height: 80px;
         animation: spin 2s linear infinite;
       }
+
+      .sentinella{
+        margin-left: 49%;
+      }
       
       @keyframes spin {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
       }
 
-
+      @media(min-width: 300px)and (max-width: 767px) {
+        .sentinella {
+            margin-left: 39%;
+        }
+      }
     @media only screen and (min-width: 700px) {
         .break {
             display: none;
@@ -95,10 +131,10 @@
 
         @media(min-width: 300px)and (max-width: 767px) {
             .slider .slide {
-                width: 390px;
+                width: 420px;
             }
             .slider{
-                height: 880px !important;
+                height: 680px !important;
 
             }
 
@@ -203,6 +239,7 @@
             width: 124px;
         }
 
+
         .rect {
             width: 627px;
             height: 507px;
@@ -217,6 +254,36 @@
             font-size: 37px !important;
             font-weight: 800;
             margin-left: -1em;
+        }
+        @media(min-width: 300px)and (max-width: 767px) {
+            .cnt{
+                width: 100%;
+                position: relative;
+                right: -50px;
+            }
+
+            .book-img {
+                display: none;
+                height: 90px;
+                width: 80px;
+                
+            }
+            .book {        
+                display: none;
+                margin-top: 7em;
+                height: 90px;
+                width: 80px;
+            }
+            .rect {
+                width: 490px !important;
+                height: 650px !important;
+            }
+
+
+            
+            body{
+                line-height: 1.5;
+            }
         }
 
         .etichetta {
@@ -236,18 +303,7 @@
 }
 
 
-@media(min-width: 300px)and (max-width: 767px) {
-    .rect {
-        width: 390px !important;
-        height: 850px !important;
-    }
-    .book {        
-        margin-top: 7em;
-        height: 121px;
-        width: 124px;
-    }
 
-}
 
 @media(min-width: 768px) {
 
@@ -956,7 +1012,7 @@ div={
 }
 
 
-  sentinel = html\`<div style="margin-left: 50%;margin-top: 1em;"><div ></div></div>\`
+  sentinel = html\`<div class="sentinella" style="margin-top: 1em;"><div ></div></div>\`
   mutable counter = 0
 
   add_book(0,10)
