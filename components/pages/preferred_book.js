@@ -188,12 +188,13 @@ function slide(params){ return \`<div class="slide">
 
 
 _slide_={var base = "";
-    for (let xx = 0; xx <= (span.length / (2 * 9)+1); xx+=2) {
+    for (let xx = 0; xx <= (span.length / (2 * 9)+2); xx+=2) {
         base = base.concat(slide(xx));
 }
 return base;
 }
 
+console.log(span)
 
 slide2=slide
 slide3=slide
