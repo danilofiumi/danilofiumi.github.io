@@ -92,7 +92,7 @@
 .observablehq--inspect {
     font: var(--mono_fonts);
     overflow-x: auto;
-    display: none;
+    display: none !important;
     white-space: pre
 }
 
@@ -101,3 +101,4 @@
     white-space: pre-wrap
 }
 
+}
