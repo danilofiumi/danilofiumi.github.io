@@ -66,6 +66,7 @@ var icons = new omdMod.Observable()
     var cliccable = document.getElementById("cliccabili" + params);
     if (cliccable !== null){
     cliccable.href = clean_ref(ref)[params];
+    cliccable.setAttribute('target', '_blank');
     var img = cliccable.children[0];
 
   img.src = clean_src(src)[params];
