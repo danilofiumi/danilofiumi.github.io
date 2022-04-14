@@ -149,7 +149,7 @@ function add_cards(from, to) {
             
             setTimeout(function () {
                 add_cards(counter*caricati,caricati*(counter+1));
-                console.log(counter)
+                //console.log(counter)
             }, 1000);
             }
       },
@@ -163,8 +163,8 @@ function add_cards(from, to) {
   }
   {
     
-    console.log(counter*caricati)
-    console.log(ref.length)
+    //console.log(counter*caricati)
+    //console.log(ref.length)
     if  (counter*caricati>=ref.length) {
         sentinel.children[0].classList.remove("loader");
     }
