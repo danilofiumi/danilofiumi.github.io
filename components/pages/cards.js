@@ -1,8 +1,8 @@
         var cards = new omdMod.Observable()
-        .target("placeholder")
-        .showValues(false)
-        .mode("ojs")
-        .text(`
+            .target("portfolio")
+            .showValues(false)
+            .mode("ojs")
+            .text(`
 <!--  -->
 link = "https://docs.google.com/document/d/1PEy7Bfk_z5farrxHhU4tNbj8bX9pfI92Q_YTc5Psy6Q/edit?usp=sharing"
 sdata2 = {
@@ -72,6 +72,7 @@ div={
     await new Promise((r) => setTimeout(r, 1350));
     
     var portfolio=document.getElementById("portfolio");
+    portfolio.style.height = null;
     var div = portfolio.appendChild(document.createElement("div"));
     div.classList.add(...["columns", "has-text-centered", "is-multiline"]);
     return div;
@@ -195,16 +196,14 @@ if (startindex != -1 && endindex != -1 && endindex > startindex)
   fruits.push(str.substring(startindex, endindex));
 return fruits;
 }
-`)
-        ;
+`);
 
-    doResize();
+        doResize();
 
-    function doResize() {
-        if (cards) {
-            cards
-                .resize()
-                .lazyRender()
-                ;
+        function doResize() {
+            if (cards) {
+                cards
+                    .resize()
+                    .lazyRender();
+            }
         }
-    }
