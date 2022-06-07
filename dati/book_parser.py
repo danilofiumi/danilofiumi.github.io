@@ -37,7 +37,7 @@ else:
 
 
 
-soup = BeautifulSoup(tabella, 'html.parser')
+""" soup = BeautifulSoup(tabella, 'html.parser') """
 
 my_dict = {"titolo":[],"link":[],"immagine":[]};
 table = soup.find('table', attrs={'id':'books'})
@@ -57,13 +57,16 @@ for row in rows:
     
 
 
-""" pd.DataFrame(my_dict).to_csv('libri_letti.csv') """
+libri=pd.DataFrame(my_dict)
 
 ##
 df=pd.read_csv('libri_letti.csv')
 df=df[['titolo', 'link', 'immagine', 'good_img']]
 
-urls=["https://www.goodreads.com/"+elem for elem in df.link.tolist()]
+to_fill=libri.append(df).drop_duplicates(['link'],keep='last')
+to_fill=to_fill[to_fill['good_img'].isna()]
+
+urls=["https://www.goodreads.com/"+elem for elem in to_fill.link.tolist()]
 
 
 
@@ -86,12 +89,12 @@ for current_page in urls:
         
     good_img.append(cover[0].img["src"])
 
-df["good_img"]=good_img
+to_fill["good_img"]=good_img
+
+final=to_fill.append(df)
 
 
-df.immagine[30]
-df.good_img[30]
-df.to_csv('libri_letti.csv')
+final.to_csv('libri_letti.csv')
 
 
-df.to_json('libri_letti.json',orient="records")
+final.to_json('libri_letti.json',orient="records")
