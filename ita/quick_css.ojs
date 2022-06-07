@@ -1,0 +1,720 @@
+md`# Quick CSS`
+
+md`[source](https://css.30secondsofcode.org/)`
+
+md`---
+## 3-Dot Loader`
+
+html`<style>
+@keyframes bouncing-loader {
+  to {
+    opacity: 0.1;
+    transform: translate3d(0, -1rem, 0);
+  }
+}
+#${Loader.id} {
+  display: flex;
+  justify-content: center;
+}
+#${Loader.id} > div {
+  width: 1rem;
+  height: 1rem;
+  margin: 3rem 0.2rem;
+  background: #8385aa;
+  border-radius: 50%;
+  animation: bouncing-loader 0.6s infinite alternate;
+}
+#${Loader.id} > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+#${Loader.id} > div:nth-child(3) {
+  animation-delay: 0.4s;
+}
+</style>
+`
+
+Loader = {
+  let view = html`
+<div id=${DOM.uid('loader').id} class="bouncing-loader" >
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+`;
+
+  yield view;
+}
+
+md`---
+## Hamburger Menu`
+
+html`<style>
+
+
+#${viewof TripleStripe.id}{
+display:flex;
+flex-direction:column;
+flex-wrap:wrap;
+justify-content:space-between;
+height:2.5rem;
+width:2.5rem;
+cursor:pointer;
+
+}
+
+
+#${viewof TripleStripe.id}  .bar{
+height:5px;
+background:black;
+border-radius:5px;
+margin:3px 0px;
+transform-origin:left;
+transition:all 0.5s;
+}
+
+#${viewof TripleStripe.id} .close.top {
+  transform: rotate(45deg);
+}
+
+#${viewof TripleStripe.id} .close.middle {
+  opacity: 0;
+}
+#${viewof TripleStripe.id} .close.bottom {
+  transform: rotate(-45deg);
+}
+</style>`
+
+viewof TripleStripe = {
+  let refId = DOM.uid('hamburger-menu');
+  let view = html`
+<div id="${refId.id}" class="tri-stri">
+  <div class="bar top"></div>
+  <div class="bar middle"></div>
+  <div class="bar bottom"></div>
+</div>`;
+  view.value = true;
+  yield view;
+
+  d3.select(view).on('click', function() {
+    let activeState = d3.select(this).classed('active');
+    // if (activeState === true) {
+    d3.select(this)
+      .selectAll('div')
+      .classed('close', !activeState);
+    d3.select(this).classed('active', !activeState);
+    view.value = activeState;
+    view.value = view.dispatchEvent(new CustomEvent('input'));
+
+    // }
+  });
+
+  return view;
+}
+
+
+TripleStripe
+
+hamburger = htl.html`<div> ${viewof TripleStripe} </div>`
+
+md`---
+## Hover Tooltip`
+
+html`<Style>
+
+#${viewof Tooltip.id}{
+  position: relative;
+  background: tomato;
+  width: 100px;
+  height: 100px;
+}
+#${viewof Tooltip.id} > .popout-tooltip {
+  position: absolute;
+  visibility: hidden;
+  left: 100%;
+  background: #333;
+  color: white;
+  padding: 15px;
+}
+#${viewof Tooltip.id}:hover > .popout-tooltip,
+#${viewof Tooltip.id}:focus > .popout-tooltip,
+#${viewof Tooltip.id}:focus-within > .popout-tooltip {
+  visibility: visible;
+}
+</style>`
+
+viewof Tooltip = {
+  let refId = DOM.uid('popout-tooltip');
+  let view = html`
+<div id="${refId.id}" tabindex="0">
+  <div class="popout-tooltip">Popout menu</div>
+</div>`;
+
+  view.value = [0, 0];
+
+  yield view;
+
+  d3.select(view).on('mousemove', function() {
+    let points = [...d3.mouse(this).map(x => ~~x)];
+
+    d3.select(this)
+      .select('.popout-tooltip')
+      .html(points);
+    view.value = points;
+    view.value = view.dispatchEvent(new CustomEvent('input'));
+  });
+}
+
+mouse_position = Tooltip
+
+md`
+
+---
+## Dynamic Shadow`
+
+html`<style>
+
+#${ColoredShadow.id} {
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  background: linear-gradient(${~~(
+    Math.sin(now / 1000) * 360
+  )}deg, #6d78ff, #00ffb8);
+  z-index: 1;
+}
+#${ColoredShadow.id}::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: inherit;
+  top: 0.5rem;
+  filter: blur(0.4rem);
+  opacity: 0.7;
+  z-index: -1;
+}
+
+</style>`
+
+ColoredShadow = {
+  let view = html`<div id="${
+    DOM.uid('dynamic-colored-shadow').id
+  }" class="dynamic-shadow"></div>`;
+
+  yield view;
+  
+  
+}
+
+md`---`
+
+md`## Thin Border`
+
+html`<style>
+#${ThinBorder.id} {
+  box-shadow: 0 0 0 1px;
+}
+
+@media (min-resolution: 2dppx) {
+#${ThinBorder.id} {
+    box-shadow: 0 0 0 0.5px;
+  }
+}
+
+@media (min-resolution: 3dppx) {
+#${ThinBorder.id} {
+    box-shadow: 0 0 0 0..35px;
+  }
+}
+
+@media (min-resolution: 4dppx) {
+#${ThinBorder.id} {
+    box-shadow: 0 0 0 0.25px;
+  }
+}</style>`
+
+ThinBorder = {
+  let view = html`<div id="${
+    DOM.uid('thin-border').id
+  }" class="thin-border">text</div>`;
+
+  yield view;
+}
+
+md`---
+## Hover Gradient Button`
+
+html`<style>
+#${HoverGradientButton.id} {
+  position: relative;
+  background: #7983ff;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border: none;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+}
+
+#${HoverGradientButton.id} > span {
+  position: relative;
+}
+
+#${HoverGradientButton.id}::before {
+  --size: 0;
+  content: '';
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: var(--size);
+  background: radial-gradient(circle closest-side, pink, transparent);
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+#${HoverGradientButton.id}:hover::before {
+  --size: 200px;
+}
+</style>`
+
+HoverGradientButton = {
+  let button = html`<button id="${
+    DOM.uid('hover-gradient-button').id
+  }" class="mouse-cursor-gradient-tracking">
+<span style="pointer-events:none;">Hover me</span>
+</button>`;
+
+  yield button;
+
+  button.onmousemove = function(e) {
+    var rect = e.target.getBoundingClientRect();
+    var x = e.clientX - rect.left;
+    var y = e.clientY - rect.top;
+    button.style.setProperty('--x', x + 'px');
+    button.style.setProperty('--y', y + 'px');
+  };
+}
+
+md`---`
+
+md`## Long Press / Hold Button`
+
+viewof HoldButton = {
+  let view = html`<button id="${DOM.uid('hold-button').id}" class="button-hold">
+    <div>
+        <svg class="progress" viewBox="0 0 32 32">
+            <circle r="8" cx="16" cy="16" />
+        </svg>
+        <svg class="tick" viewBox="0 0 24 24">
+            <polyline points="18,7 11,16 6,12" />
+        </svg>
+    </div>
+    <ul>
+        <li>Publish</li>
+        <li>Sure ?</li>
+        <li>Public</li>
+    </ul>
+</button>
+`;
+
+  yield view;
+
+  // Hold button with mouse / select with tab and hold spacebar
+
+  let duration = 1600,
+    success = button => {
+      //Success function
+      button.classList.add('success');
+    };
+
+  document.querySelectorAll('.button-hold').forEach(button => {
+    button.style.setProperty('--duration', duration + 'ms');
+    ['mousedown', 'touchstart', 'keypress'].forEach(e => {
+      button.addEventListener(e, ev => {
+        if (
+          e != 'keypress' ||
+          (e == 'keypress' &&
+            ev.which == 32 &&
+            !button.classList.contains('process'))
+        ) {
+          button.classList.add('process');
+          button.timeout = setTimeout(success, duration, button);
+        }
+      });
+    });
+    ['mouseup', 'mouseout', 'touchend', 'keyup'].forEach(e => {
+      button.addEventListener(
+        e,
+        ev => {
+          if (e != 'keyup' || (e == 'keyup' && ev.which == 32)) {
+            button.classList.remove('process');
+            clearTimeout(button.timeout);
+          }
+        },
+        false
+      );
+    });
+  });
+}
+
+html`<style>.button-hold {
+  --color: #F6F8FF;
+  --background: #1A1E32;
+  --icon: var(--color);
+  --progress-border: #2B3044;
+  --progress-active: #F6F8FF;
+  --progress-success: #16BF78;
+  --tick-stroke: var(--progress-active);
+  --shadow: rgba(0, 9, 61, 0.2);
+  --shadow-active: rgba(0, 9, 61, 0.32);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19px;
+  padding: 12px 32px;
+  border: 0;
+  border-radius: 24px;
+  outline: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  cursor: pointer;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: box-shadow .3s, -webkit-transform .3s;
+  transition: transform .3s, box-shadow .3s;
+  transition: transform .3s, box-shadow .3s, -webkit-transform .3s;
+  box-shadow: 0 var(--shadow-y, 4px) var(--shadow-blur, 12px) var(--shadow);
+  -webkit-transform: scale(var(--scale, 1));
+          transform: scale(var(--scale, 1));
+  color: var(--color);
+  background: var(--background);
+}
+.button-hold > div {
+  border-radius: 50%;
+  top: 12px;
+  left: 12px;
+  position: absolute;
+  background: var(--progress-border);
+  transition: opacity .2s, -webkit-transform .3s;
+  transition: transform .3s, opacity .2s;
+  transition: transform .3s, opacity .2s, -webkit-transform .3s;
+  opacity: var(--icon-o, 0);
+  -webkit-transform: translateX(var(--icon-x, -4px));
+          transform: translateX(var(--icon-x, -4px));
+}
+.button-hold > div:before {
+  content: '';
+  width: 16px;
+  height: 16px;
+  left: 2px;
+  top: 2px;
+  z-index: 1;
+  position: absolute;
+  background: var(--background);
+  border-radius: inherit;
+  -webkit-transform: scale(var(--background-scale, 1));
+          transform: scale(var(--background-scale, 1));
+  transition: -webkit-transform .32s ease;
+  transition: transform .32s ease;
+  transition: transform .32s ease, -webkit-transform .32s ease;
+}
+.button-hold > div svg {
+  display: block;
+  fill: none;
+  width: 20px;
+  height: 20px;
+}
+.button-hold > div svg.progress {
+  -webkit-transform: rotate(-90deg) scale(var(--progress-scale, 1));
+          transform: rotate(-90deg) scale(var(--progress-scale, 1));
+  transition: -webkit-transform .5s ease;
+  transition: transform .5s ease;
+  transition: transform .5s ease, -webkit-transform .5s ease;
+}
+.button-hold > div svg.progress circle {
+  stroke-dashoffset: 1;
+  stroke-dasharray: var(--progress-array, 0) 52;
+  stroke-width: 16;
+  stroke: var(--progress-active);
+  transition: stroke-dasharray var(--duration) linear;
+}
+.button-hold > div svg.tick {
+  left: 0;
+  top: 0;
+  position: absolute;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: var(--tick-stroke);
+  transition: stroke .3s ease .7s;
+}
+.button-hold > div svg.tick polyline {
+  stroke-dasharray: 18 18 18;
+  stroke-dashoffset: var(--tick-offset, 18);
+  transition: stroke-dashoffset .4s ease .7s;
+}
+.button-hold ul {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  pointer-events: none;
+  list-style: none;
+  min-width: 52px;
+  position: relative;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  transition: -webkit-transform .3s;
+  transition: transform .3s;
+  transition: transform .3s, -webkit-transform .3s;
+  -webkit-transform: translate3d(var(--ul-x, 0), 0, 0);
+          transform: translate3d(var(--ul-x, 0), 0, 0);
+}
+.button-hold ul li {
+  top: var(--t, 0);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  -webkit-transform: translateY(var(--ul-y)) translateZ(0);
+          transform: translateY(var(--ul-y)) translateZ(0);
+  transition: opacity .2s ease .16s, -webkit-transform .3s ease .16s;
+  transition: transform .3s ease .16s, opacity .2s ease .16s;
+  transition: transform .3s ease .16s, opacity .2s ease .16s, -webkit-transform .3s ease .16s;
+}
+.button-hold ul li:not(:first-child) {
+  --o: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+.button-hold ul li:nth-child(1) {
+  opacity: var(--ul-o-1, 1);
+}
+.button-hold ul li:nth-child(2) {
+  --t: 100%;
+  opacity: var(--ul-o-2, 0);
+}
+.button-hold ul li:nth-child(3) {
+  --t: 200%;
+  opacity: var(--ul-o-3, 0);
+}
+.button-hold:focus:not(.process), .button-hold:hover:not(.process) {
+  --shadow: var(--shadow-active);
+  --shadow-y: 8px;
+  --shadow-blur: 16px;
+}
+.button-hold:active:not(.success) {
+  --scale: .96;
+  --shadow-y: 4px;
+  --shadow-blur: 8px;
+}
+.button-hold.process {
+  --icon-x: 0;
+  --ul-y: -100%;
+  --ul-o-1: 0;
+  --ul-o-2: 1;
+  --ul-o-3: 0;
+}
+.button-hold.process, .button-hold.success {
+  --ul-x: 8px;
+  --icon-o: 1;
+  --progress-array: 52;
+}
+.button-hold.success {
+  --icon-x: 6px;
+  --progress-border: none;
+  --progress-scale: .11;
+  --tick-stroke: var(--progress-success);
+  --background-scale: 0;
+  --tick-offset: 36;
+  --ul-y: -200%;
+  --ul-o-1: 0;
+  --ul-o-2: 0;
+  --ul-o-3: 1;
+}
+.button-hold.success > div svg.progress {
+  -webkit-animation: tick .3s linear forwards .4s;
+          animation: tick .3s linear forwards .4s;
+}
+
+@-webkit-keyframes tick {
+  100% {
+    -webkit-transform: rotate(-90deg) translate(0, -5px) scale(var(--progress-scale));
+            transform: rotate(-90deg) translate(0, -5px) scale(var(--progress-scale));
+  }
+}
+
+@keyframes tick {
+  100% {
+    -webkit-transform: rotate(-90deg) translate(0, -5px) scale(var(--progress-scale));
+            transform: rotate(-90deg) translate(0, -5px) scale(var(--progress-scale));
+  }
+}</style>`
+
+md`---
+## CHECKBOX`
+
+html`<style>
+
+#${viewof Toggle.id} .switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+#${viewof Toggle.id} .switch::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 18px;
+  background-color: white;
+  top: 1px;
+  left: 1px;
+  transition: all 0.3s;
+}
+
+ #${viewof Toggle.id} > input[type='checkbox']:checked + .switch::after {
+  transform: translateX(20px);
+}
+
+#${viewof Toggle.id} > input[type='checkbox']:checked + .switch {
+  background-color: #7983ff;
+}
+
+#${viewof Toggle.id} > .offscreen {
+  position: absolute;
+  left: -9999px;
+}
+</style>`
+
+Toggle
+
+mutable view = null
+
+Toggle
+
+viewof Toggle = {
+  let view = html`
+<div id="${DOM.uid('checkbox-toggle').id}">
+  <input type="checkbox" id="toggle" class="offscreen" /> 
+  <label for="toggle" class="switch"></label>
+</div>`;
+  view.value = false;
+  yield view;
+
+  d3.select(view).on('click', function() {
+    let input = d3.select(this).select('input');
+    let activeState = input.property('checked');
+    input.property('checked', function() {
+      activeState === false ? false : true;
+    });
+    view.value = activeState;
+    view.dispatchEvent(new CustomEvent('input'));
+  });
+  yield view;
+}
+
+ToggleExplanation = md`
+This effect is styling only the <code class="language-text">&lt;label&gt;</code> element to look like a toggle switch, and hiding the actual <code class="language-text">&lt;input&gt;</code> checkbox by positioning it offscreen. When clicking the label associated with the <code class="language-text">&lt;input&gt;</code> element, it sets the <code class="language-text">&lt;input&gt;</code> checkbox into the <code class="language-text">:checked</code> state.
+
+The <code class="language-text">for</code> attribute associates the <code class="language-text">&lt;label&gt;</code> with the appropriate <code class="language-text">&lt;input&gt;</code> checkbox element by its <code class="language-text">id</code>.
+
+<code class="language-text">.switch::after</code> defines a pseudo-element for the <code class="language-text">&lt;label&gt;</code> to create the circular knob.
+
+<code class="language-text">input[type='checkbox']:checked + .switch::after</code> targets the <code class="language-text">&lt;label&gt;</code>'s pseudo-element's style when the checkbox is <code class="language-text">checked</code>.</li>
+
+<code class="language-text">transform: translateX(20px)</code> moves the pseudo-element (knob) 20px to the right when the checkbox is <code class="language-text">checked</code>.
+
+<code class="language-text">background-color: #7983ff;</code> sets the background-color of the switch to a different color when the checkbox is <code class="language-text">checked</code>.
+
+<code class="language-text">.offscreen</code> moves the <code class="language-text">&lt;input&gt;</code> checkbox element, which does not comprise any part of the actual toggle switch, out of the flow of document and positions it far away from the view, but does not hide it so it is accessible via keyboard and screen readers.
+
+
+<code class="language-text">transition: all 0.3s</code> specifies all property changes will be transitioned over 0.3 seconds, therefore transitioning the <code class="language-text">&lt;label&gt;</code>'s <code class="language-text">background-color</code> and the pseudo-element's \`transform\` property when the checkbox is checked.`
+
+md`
+---
+## Absolute Centered Child`
+
+html`<style>
+#${CenteredContent.id} {
+  border: 1px solid #333;
+  height: 250px;
+  position: relative;
+  width: 250px;
+}
+
+#${CenteredContent.id} .child {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  border:1px solid black;
+}</style>`
+
+CenteredContent = html`
+<div id="${DOM.uid('absolute-centered-child').id}" class="parent">
+  <div class="child">Centered content</div>
+</div>`
+
+md`---
+## Grid Centered`
+
+html`
+<style>
+#${GridCentering.id}
+{
+  border: 1px solid black;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+</style>
+`
+
+GridCentering = html`<div id="${DOM.uid('grid-centered').id}" >
+  <div>Centered content.</div>
+</div>
+`
+
+md`---
+## Vertically Centered`
+
+html`<style>
+
+#${VerticallyCentered.id} {
+  border:1px solid black;
+  padding:0.5px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-size:3rem;
+}
+
+#${VerticallyCentered.id} .child{
+  line-height:3.5rem;
+  background-color: tomato;
+  flex: 1;
+  text-transform:uppercase;
+}
+</style>`
+
+VerticallyCentered = html`
+  <div id="${DOM.uid("vertically-centered").id}">
+    <div class="child"><p>Vertically Centered</p></div>
+</div>`
+
+md`---
+## ANX`
+
+d3 = require('d3')
