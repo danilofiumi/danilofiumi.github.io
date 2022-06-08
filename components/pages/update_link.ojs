@@ -1,6 +1,6 @@
 mutable counter = 1
 
-icon = htl.html`<svg class="clip" id="italia" onclick=${() =>
+icon = htl.html`<svg class="clip language" id="italia" onclick=${() =>
     changeIcon()}  width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
   <rect width="32" height="32" rx="16" fill="#343131"/>
   <path d="M1 16C1 22.55 5.2 28.1 11 30.15V1.84998C5.2 3.89998 1 9.44998 1 16Z" fill="#75A843"/>
@@ -27,7 +27,7 @@ icon = htl.html`<svg class="clip" id="italia" onclick=${() =>
   } */
 
 
-ing = htl.html`<svg onclick=${() =>changeIcon()} class="clip"  width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+ing = htl.html`<svg onclick=${() =>changeIcon()} class="clip language"  width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="32" height="32" rx="16" fill="#343131"/>
 <path d="M11.053 30V23.2131L5.9576 26.9508C7.39223 28.2787 9.12367 29.3115 11.053 30V30ZM20.947 30C22.8763 29.3115 24.6078 28.2787 26.0424 26.9508L20.947 23.1639V30V30ZM2 21C2.14841 21.4918 2.34629 21.9344 2.59364 22.4262L4.52297 21H2ZM27.477 21L29.4064 22.4262C29.6042 21.9836 29.8021 21.4918 30 21H27.477Z" fill="#2A5F9E"/>
 <path d="M11.6633 19H1C1.15306 19.7179 1.35714 20.3846 1.56122 21.0513H4.16327L2.17347 22.5385C2.58163 23.4103 3.04082 24.1795 3.60204 24.9487L8.85714 21.0513H10.898V22.0769L4.92857 26.4872L5.64286 27.2051L10.898 23.359V30.4359C11.5612 30.6923 12.2245 30.8462 12.9388 31V19H11.6633ZM31 19H19.0612V31C19.7755 30.8462 20.4388 30.641 21.102 30.4359V23.359L26.3571 27.2051C27.0714 26.5385 27.6837 25.8205 28.2959 25.0513L22.8367 21.0513H26.3061L29.4184 23.359C29.5714 23.1026 29.7245 22.7949 29.8265 22.5385L27.8367 21.0513H30.4388C30.6429 20.3846 30.8469 19.7179 31 19" fill="white"/>
@@ -41,7 +41,7 @@ ing = htl.html`<svg onclick=${() =>changeIcon()} class="clip"  width="32" height
 
 
 ita = htl.html`
-<svg width="32" height="32" onclick=${() =>changeIcon()} class="clip" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="32" height="32" onclick=${() =>changeIcon()} class="clip language" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="32" height="32" rx="16" fill="#343131"/>
 <path d="M1 16C1 22.55 5.2 28.1 11 30.15V1.84998C5.2 3.89998 1 9.44998 1 16Z" fill="#75A843"/>
 <path d="M31 16C31 9.44998 26.8 3.89998 21 1.84998V30.15C26.85 28.1 31 22.55 31 16" fill="#ED4C5C"/>
@@ -51,7 +51,7 @@ ita = htl.html`
 
 htl.html`
 <style>
-      .clip:hover {
+      .clip language:hover {
         opacity: 0.5;
     }
 </style>`
@@ -89,7 +89,7 @@ header={
         var LNG='ENG';
         var cc= htl.html`<div class="columns has-text-centered-mobile pt-3 pl-6 pr-6 ml-4 mr-4 header" >
         <div class="column pr-4 is-1 has-text-right has-text-left-mobile"><span class="pt-2 pb-2 pl-4 pr-4 " style="backdrop-filter: blur(4px); border-radius:2.89px; background:#2F2C2C;color: white; font-size:9pt !important;">DF</span></div>
-        <div id="bandiera" class="active nav column is-1 pl-0-desktop" style="cursor: pointer;">${ing}</div>
+        <div id="bandiera" class="active nav column is-1 pl-0-desktop" >${ing}</div>
         <div class="active nav column is-1 is-offset-5"><a href="${ref.filter(d=>d.language==LNG)[0]['value']}" style="opacity: 0.7; color:black ;font-size:14pt !important;">${ref.filter(d=>d.language==LNG)[0]['name']}</a></div>
         <div class="active nav column is-1"><a href="${ref.filter(d=>d.language==LNG)[1]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[1]['name']}</a></div>
         <div class="active nav column is-1"><a href="${ref.filter(d=>d.language==LNG)[2]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[2]['name']}</a></div>
@@ -105,7 +105,7 @@ header={
         var cc= htl.html`<div class="columns has-text-centered-mobile pt-3 pl-6 pr-6 ml-4 mr-4 header">
         <div class="column pr-4 is-1 has-text-right has-text-left-mobile"><span class="pt-2 pb-2 pl-4 pr-4 " style="backdrop-filter: blur(4px); border-radius:2.89px; background:#2F2C2C;color: white; font-size:9pt !important;">DF</span></div>
         
-            <div id="bandiera" class=" active nav column is-1 pl-0-desktop" style="cursor: pointer;">${ita}</div>
+            <div id="bandiera" class=" active nav column is-1 pl-0-desktop" >${ita}</div>
             <div class="active nav column is-1 is-offset-5"><a href="${ref.filter(d=>d.language==LNG)[0]['value']}" style="opacity: 0.7; color:black ;font-size:14pt !important;">${ref.filter(d=>d.language==LNG)[0]['name']}</a></div>
             <div class="active nav column is-1"><a href="${ref.filter(d=>d.language==LNG)[1]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[1]['name']}</a></div>
             <div class="active nav column is-1"><a href="${ref.filter(d=>d.language==LNG)[2]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[2]['name']}</a></div>

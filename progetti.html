@@ -96,6 +96,7 @@ check my profile on linkedin.com/in/danilofiumi/
     
     .clip:hover {
         opacity: 0.5;
+        cursor: pointer;
     }
     
     .wtmk {
@@ -544,45 +545,6 @@ check my profile on linkedin.com/in/danilofiumi/
     <script src="./components/gfetch.js" type="text/javascript" charset="utf-8"></script>
 
 
-    <script>
-        var app = new omdMod.Observable()
-            .target("proj_card")
-            .showValues(false)
-            .mode("ojs")
-            .text(`
-
-
-import {proj_card_} from './components/pages/card_project.ojs';
-
-
-
-project_lnk="https://i.stack.imgur.com/hhP4T.jpg"
-
-
-prj1=proj_card_(project_lnk,"img1-src","card1","blue")
-prj2=proj_card_(project_lnk,"img2-src","card2","red")
-prj3=proj_card_(project_lnk,"img3-src","card3","green")
-
-proj_card=prj1.concat(prj2,prj3)
-
-document.getElementById('proj_card').innerHTML = proj_card
-    
-
-
-`);
-
-
-        doResize();
-
-        function doResize() {
-            if (app) {
-                app
-                    .resize()
-                    .lazyRender();
-            }
-        }
-    </script>
-
     <script src="./components/utilities/hamburger.js" type="text/javascript" charset="utf-8"></script>
     <style>
         .nav {
@@ -611,6 +573,46 @@ document.getElementById('proj_card').innerHTML = proj_card
         }
     </style>
 
+
+    <script>
+        var app = new omdMod.Observable()
+            .target("proj_card")
+            .showValues(false)
+            .mode("ojs")
+            .text(`
+
+
+import {proj_card_} from './components/pages/card_project.ojs';
+
+
+
+project_lnk="https://i.stack.imgur.com/hhP4T.jpg"
+
+
+prj1=proj_card_("https://www.youtube.com/channel/UCr3Ge3ahmzBRO8DAU92NSUg","img1-src","card1","blue")
+prj2=proj_card_("https://opensea.io/collection/bored-consultant-it-club","img2-src","card2","red")
+prj3=proj_card_(project_lnk,"img3-src","card3","green")
+
+//proj_card=prj1.concat(prj2,prj3)
+proj_card=prj1.concat(prj2)
+
+document.getElementById('proj_card').innerHTML = proj_card
+    
+
+
+`);
+
+
+        doResize();
+
+        function doResize() {
+            if (app) {
+                app
+                    .resize()
+                    .lazyRender();
+            }
+        }
+    </script>
 
 </body>
 
