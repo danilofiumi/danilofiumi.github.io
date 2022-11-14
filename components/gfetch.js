@@ -20,7 +20,7 @@ header
 link
 
 
-sdata2 = {
+data = {
     return await d3.text(
       link.substr(0, link.indexOf("/edit")) + "/export?format=html"
     );
@@ -41,10 +41,10 @@ sdata2 = {
     var fruits = [];
     for (let elm = 0; elm < ids_.length; ++elm) {
       render.html.push(
-        the_cleaner_sc(sdata2)
+        the_cleaner_sc(data)
           .substring(
-            get_span_pos(the_cleaner_sc(sdata2), elm),
-            get_span_pos(the_cleaner_sc(sdata2), elm + 1)
+            get_span_pos(the_cleaner_sc(data), elm),
+            get_span_pos(the_cleaner_sc(data), elm + 1)
           )
           .replace(ids_[elm], "")
           .replace(new RegExp("</span></h5>", "g"), "")
@@ -175,11 +175,11 @@ htl.html\`<html><head><meta content="text/html; charset=UTF-8" http-equiv="conte
   <!-- ----------------------------------------------------------------------- -->
   function find_all(regexp, start, end) {
     var prl = [];
-    var array = [...sdata2.matchAll(regexp)];
+    var array = [...data.matchAll(regexp)];
     for (let cc = 0; cc < array.length; ++cc) {
       prl.push(
         extractword(
-          sdata2.slice(array[cc]["index"], sdata2.length),
+          data.slice(array[cc]["index"], data.length),
           start,
           end
         )[0]
@@ -195,13 +195,13 @@ htl.html\`<html><head><meta content="text/html; charset=UTF-8" http-equiv="conte
       fruits.push(str.substring(startindex, endindex));
     return fruits;
   }
-  function get_span_pos(data, params) {
+  function get_span_pos(text, params) {
     var h5 = find_all(/<h5/g, "[", "]");
   
-    if (data.indexOf(h5[params]) != -1) {
-      return data.indexOf(h5[params]);
+    if (text.indexOf(h5[params]) != -1) {
+      return text.indexOf(h5[params]);
     } else {
-      return data.length - 14;
+      return text.length - 14;
     }
   }
 
@@ -212,10 +212,10 @@ htl.html\`<html><head><meta content="text/html; charset=UTF-8" http-equiv="conte
     return _string;
     }
 
-    function the_cleaner_sc(sdata2) {
+    function the_cleaner_sc(data) {
         var tmp1 = clean_style(
           clean_style(
-            clean_style(clean_style(sdata2, minor, "<"), major, ">"),
+            clean_style(clean_style(data, minor, "<"), major, ">"),
             quotes,
             '"'
           ),
