@@ -155,7 +155,7 @@ htl.html\`<html><head><meta content="text/html; charset=UTF-8" http-equiv="conte
       } else if (ids_src.includes(to_resolve.tag[index])) {
         var img = document.getElementById(
           to_resolve.tag[index].replace("[", "").replace("]", "")
-        );
+        ); 
   
         try {
           img.src = src[iter_src];
