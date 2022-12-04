@@ -64,10 +64,34 @@ check my profile on linkedin.com/in/danilofiumi/
             <a href="progetti.html">Progetti</a>
           </div>
     </div>
+
+    <nav class="navbar is-hidden-desktop is-hidden-tablet" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+          <img src="favicon.png" width="35" height="38">
+        </a>
+    
+        <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+    
+      <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+    
+          <a class="navbar-item" href="index.html">Home</a>
+          <a class="navbar-item" href="libri.html">Libri</a>
+          <a class="navbar-item" href="about.html">About</a>
+          <a class="navbar-item" href="progetti.html">Progetti</a>
+
+      </div>
+    </nav>
     <div class="all">
-    <br>
-    <br>
-    <br>
+    <br class="is-hidden-mobile">
+    <br class="is-hidden-mobile">
+    <br class="is-hidden-mobile">
     <div class="columns is-vcentered is-centered mt-0  ml-2 ">
         <!-- icone social -->
 
@@ -76,7 +100,8 @@ check my profile on linkedin.com/in/danilofiumi/
         </figure>
         <div class="column is-7 pb-0 ml-3 mt-0 pt-0 " style="position: relative;">
             <div  id="title" style="font-size:26pt;"></div>
-            <div class="icons is-inline-flex is-mobile ">
+
+            <div class="icons is-inline-flex is-mobile is-hidden-mobile">
                 
                 <figure class="is-1by1 is-480x480 mr-5">
                     <a target="_blank" href="https://github.com/danilofiumi" class="clip">
@@ -119,7 +144,7 @@ check my profile on linkedin.com/in/danilofiumi/
 
             <div  id="part1"  ></div>
 
-            <iframe width="100%" height="475" src="https://www.youtube.com/embed/eHjYMJSfSjc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="100%" height="475" id="youtube" src="https://www.youtube.com/embed/eHjYMJSfSjc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
             <div  id="part1-continued"  ></div>
             <figure class=" is-16by9 is-640x360">
@@ -184,5 +209,28 @@ check my profile on linkedin.com/in/danilofiumi/
 
     
 </body>
+<script >
 
+    document.addEventListener('DOMContentLoaded', () => {
+    
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    
+    // Add a click event on each of them
+    $navbarBurgers.forEach( el => {
+      el.addEventListener('click', () => {
+    
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+    
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+    
+      });
+    });
+    
+    });
+      </script>
 </html>

@@ -12,7 +12,10 @@ input:valid{
     .all {
         margin-left: 0px !important; /* Same as the width of the sidenav */
       }
-      
+      #youtube{
+        height: 275px;
+
+      }      
 }
 
 .sidenav {
@@ -200,6 +203,9 @@ color: #FFFFFF;
 
 }
 
+
+
+
 #title{
     height: auto;
 }
@@ -210,4 +216,14 @@ color: #FFFFFF;
 #access-src{
     
     width: 60%;
+}
+
+@media(min-width: 2000px)and (max-width: 9000px) {
+    .face{
+        position: absolute;
+        
+        right: 75% !important;
+        transform: scale(0.7);
+    
+    }
 }
