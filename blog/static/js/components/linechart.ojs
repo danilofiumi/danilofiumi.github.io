@@ -1,0 +1,380 @@
+md`
+# Initialize Plot
+<svg id="chart"></svg>
+`
+ 
+
+// fetched = d3.csv("./static/datasets/grouped.csv",d3.autoType)
+
+// data = d3.csv("http://127.0.0.1:5500/web_article/app/static/js/components/datasets/grouped.csv",d3.autoType) 
+data = d3.csv("./static/assets/datasets/grouped.csv",d3.autoType) 
+/* df1 = d3.csvParse(await FileAttachment("http://127.0.0.1:5500/observable/test.csv").text()) */
+/* fetched = (await fetch(`http://127.0.0.1:5500/observable/pie.json`)).json() */
+
+
+
+
+mutable replay=0
+header={
+    return document.getElementById("chart");
+}
+
+
+subject = { 
+  const observer = new IntersectionObserver(entries => {
+    const entry = entries.pop();
+    // console.log('observer:', observer);
+    if ((entry.intersectionRatio) > 0) {
+        
+        mutable replay=1
+        observer.unobserve(header)
+    }
+    
+    
+  }, {
+    threshold: Array.from({length: 101}, (_, i) => i / 100)
+  });
+  observer.observe(header);
+  invalidation.then(() => observer.disconnect());
+  
+}
+
+
+radius=9
+chart = {
+    replay
+  const svg = d3.select('#chart');
+  
+  svg.attr("viewBox", [0, 0, width, height]);
+  // Append our donut container group
+  svg.selectAll("*").remove();
+  svg.attr('class','linechart')
+  
+
+  
+  
+
+svg.append("g").call(grid);
+
+const xruler = svg.append("line") 
+  .style("stroke", "#FED3D3") 
+  .attr('stroke-width', 3)
+  .attr("x1", x(2015)) 
+  .attr("y1", y(100)) //valore di ancoraggio asse y
+  .attr("x2", x(2023)) //lunghezza della linea
+  .attr("y2", y(100)) //valore di ancoraggio asse y
+  
+
+
+
+  svg.append("g")
+      .call(xAxis).style('stroke-width','5px')
+      .style('color','black')
+      .call(g => g.selectAll(".tick text") 
+        .style("font-size","20px")
+        .attr("x", 0)
+        .attr("dy", 20))
+    .call(g => g.selectAll(".tick line")
+        .attr('color','#84B60B')
+        .style("stroke-width","2px"))
+
+  svg.append("g")
+      .call(yAxis).style('stroke-width','5px') 
+      .style('color','black')
+    .call(g => g.selectAll(".tick line")
+        .attr('color','#84B60B')
+        .style("stroke-width","2px"))
+    .call(g => g.selectAll(".tick text")
+        .style("font-size","20px")
+        .attr("x", -20)
+        .attr("dy", 3));
+    
+  
+
+  svg.append("path")
+      .datum(data)
+      .attr("fill", "none")      
+      .attr("stroke", "#134EFF")
+        .attr("stroke-width", 6)
+      .attr("d", d3.line()
+                .defined(d => !isNaN(+d.rounded_seconds))
+                .x(d => x(d.year))
+                .y(d => y(+d.rounded_seconds))).transition()
+    .duration(2000)
+    .attrTween("stroke-dasharray", tweenDash);
+      
+
+
+
+
+   svg
+.selectAll("circle")
+.data(data)
+.join("circle")
+.attr('class','circle')
+.attr("id", (d,i)=>"circle"+i)
+.transition()
+    .delay(function(d,i){return(i*3)})
+    .duration(1000)
+.attr("cx",d => x(d.year))
+.attr("cy",d => y(+d.rounded_seconds))
+.attr("r", radius)
+.attr("fill", "#B1F30D")
+.attr("opacity", 1)
+.style("stroke",'black')
+.style("cursor",'pointer')
+.style("stroke-width",'2px')
+.style("filter" ,"url(#shadow)")
+
+   
+   
+
+/* ---------------------------------- defs ---------------------------------- */
+  var defs =    svg.append("defs");
+
+  //Create a radial Sun-like gradient
+  defs
+    .append("filter").attr('y','-10%').attr('x','-27%').attr('height','140%').attr('width','180%')
+     
+    .attr("id", "shadow")
+    .append('feDropShadow')
+    .attr('dx','-2')
+    .attr('dy','2')
+    .attr('stdDeviation','0')
+    
+    
+
+  return svg.node();
+} 
+
+
+/* coordinate */
+all_widths=[window.innerWidth, window.screen.width, document.documentElement.clientWidth, document.getElementsByTagName('body')[0].clientWidth]
+all_height=[window.innerHeight, window.screen.height, document.documentElement.clientHeight, document.getElementsByTagName('body')[0].clientHeight]
+
+shw=0
+fixed_height = 500
+
+
+
+dms={if (all_widths[shw] < 600) {
+    // mobile
+
+    return   [1.2 * all_widths[shw], .8 * fixed_height]
+}
+if (all_widths[shw] > 900){
+    // desktop
+    return [.4 * all_widths[shw],.7 *fixed_height]
+}
+else{
+    // tablet
+    return [.8 * all_widths[shw],.55 *fixed_height]
+}
+}
+width=dms[0]
+height=dms[1]
+
+/* height = 300 */
+
+
+margin = ({top:30, right:30, bottom:60, left:60})
+
+Object.keys(data[0])
+
+x = d3.scaleTime()
+    .domain(d3.extent(data, d => d.year))
+    .range([margin.left, width - margin.right])
+
+y = d3.scaleLinear()
+    .domain(d3.extent(data, d=> +d.rounded_seconds)).nice()
+    .range([height - margin.bottom, margin.top])
+
+xAxis = g => g
+    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x).ticks(width / 120).tickSizeOuter(0).tickFormat(function(d, i) {
+    
+        
+        return (d*1) ;}
+        ))
+
+yAxis = g => g
+    .attr("transform", `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y).ticks(5).tickSizeOuter(0).tickFormat(function(d, i) {
+        return (d)+'"' ;}
+        )
+    )
+    // .call(g => g.select(".domain").remove())
+    // .call(g => g.select(".tick:last-of-type text").clone()
+    //     .attr("x", 3)
+    //     .attr("text-anchor", "start")
+    //     .attr("font-weight", "bold")
+    //     .text(data.y))
+
+
+
+
+
+d3 = require("d3@5", "d3-delaunay@5")
+
+
+
+
+grid = (g) =>
+  g
+    .attr("stroke", "currentColor")
+    
+    .attr('color','#84B60B')
+    .attr('stroke-dasharray','8,8')
+    .style("stroke-width",".6px")
+    .call((g) =>
+      g
+        .append("g")
+        .selectAll("line")
+        .data(y.ticks(5))
+        .join("line")
+        .attr("y1", (d) => 0.5 + y(d))
+        .attr("y2", (d) => 0.5 + y(d))
+        .attr("x1", margin.left)
+        .attr("x2", width - margin.right)
+    )
+
+
+/* -------------------------------------------------------------------------- */
+/*								   tooltip								  */
+/* -------------------------------------------------------------------------- */
+///
+    tooltip = {
+        chart
+    const tooltip = d3.select("body").append("div")
+    .attr("class", "svg-tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .text("I'm a circle!");
+
+    
+    data.map((d,i)=> 
+    d3.select("#circle"+i)
+        .on("mouseover", function(){
+            d3.select(this)
+            .attr('r', radius * 3);
+            tooltip.text(d.rounded_seconds.toFixed(2)+' secondi ');
+        return tooltip.style("visibility", "visible");
+        })
+        .on("mousemove", function(){		
+        return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+        })
+        .on("mouseout", function(){
+            d3.select(this)
+            .attr('r', radius)
+        return tooltip.style("visibility", "hidden");
+        })
+        .on("click", function() {
+        setStyle(d3.select(this));
+        make_stuff(d3.select(this))
+        d3.event.stopPropagation();
+        
+        
+         
+    }).transition().delay(1500).duration(125*i).ease(d3.easeExpInOut).attr('r', radius*2).transition().duration(125*i).ease(d3.easeExpInOut).attr('r', radius))
+    
+    
+    ; 
+    }
+
+
+    function setStyle(selection) {  
+    selection.attr("fill", "magenta").attr("opacity", "1");
+    }
+
+    styles = html`
+    <style>
+
+    .svg-tooltip {
+        background: rgba(69,77,93,.9);
+        border-radius: .3rem;
+        color: #fff;
+        display: block;
+        font-size: 11px;
+        max-width: 320px;
+        padding: .2rem .4rem;
+        position: absolute;
+        text-overflow: ellipsis;
+        white-space: pre;
+        z-index: 300;
+        visibility: hidden;
+    }
+    </style>`
+
+    function tweenDash() {
+    const l = this.getTotalLength(),
+        i = d3.interpolateString("0," + l, l + "," + l);
+    return function(t) { return i(t) };
+    }
+
+    
+
+    function make_stuff(selection) {
+
+
+    const g = d3.select(".anchor").append("div").attr('class','blocker')
+    .style("position", "absolute")
+    .style("opacity", "0")
+    .style("top", "-10px")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .html(
+        `<div style="background:black; width:${width*2}px;height:${height*2}px" onclick='hidePopup()'></div> 
+        `);
+
+    g.transition().duration(350).ease(d3.easeExpInOut).style("opacity", "0")
+    
+    console.log(selection.attr('cx'));
+
+    
+    
+    console.log(d3.select('#chart').node().getBBox().width-300);
+    
+    function position_x() {
+        
+    if (all_widths[0] <800) {
+    return "-2%"
+    }
+    else {
+        return  Math.min(selection.attr('cx')/10,d3.select('#chart').node().getBBox().width/10) + 'px';
+    }
+    
+    }
+   function position_y() {
+        
+    if (all_widths[0] <800) {
+
+        
+        
+        
+    return Math.min(selection.attr('cy')-100,100) +'px'
+    // return "50%"
+    
+    }
+    else{
+        return Math.min(selection.attr('cy')/5,d3.select('#chart').node().getBBox().height/5) + 'px'
+    
+    }
+    
+    }    
+    const w_new_pos = position_x();
+    
+    const h_new_pos=position_y();
+    
+    
+    
+    
+    
+    
+    d3.select(".big-card").style('opacity','0').style('display','flex').style('z-index','1000')
+    .transition().duration(800).ease(d3.easeExpInOut).style("opacity", "1")
+    .style("left",w_new_pos)
+    .style("top",h_new_pos)
+    .style('transform', function(d) {return all_widths[shw] < 800 ? 'scale(.8)translate(-5%, -10%)' : 'translate(30%, 30%)'}) 
+    
+
+}

@@ -1,0 +1,294 @@
+md`
+# Animated line chart
+<svg id="chart"></svg>
+
+
+`
+fetched = d3.csv("https://cdn.jsdelivr.net/npm/vega-datasets@v1.29.0/data/stocks.csv",d3.autoType)
+/* df1 = d3.csvParse(await FileAttachment("http://127.0.0.1:5500/observable/test.csv").text()) */
+/* fetched = (await fetch(`http://127.0.0.1:5500/observable/pie.json`)).json() */
+dt1 = fetched.filter(d=>new Date(d.date)>=new Date(2009, 1, 1)).filter(d=>d.symbol=='IBM')
+
+data={
+{for (let index = 0; index < dt1.length; index++) {
+    dt1[index]['new_data']=new Date(dt1[index]["date"]);   
+}
+return dt1}
+}
+
+ 
+bins=10
+Plot.plot({
+  marks: [
+    Plot.ruleY([0]),
+    Plot.ruleX([0]),
+    Plot.rectY(fetched, Plot.binX({y: "sum"}, {x: "price", thresholds: bins}))
+  ]
+})
+
+  
+chart = {
+  const svg = d3.select('#chart');
+  
+  svg.attr("viewBox", [0, 0, width, height]);
+  // Append our donut container group
+  svg.selectAll("*").remove();
+  svg.attr('class','linechart')
+  
+    svg.append("g")
+      .call(yAxis).style('stroke-width','5px') 
+      .style('color','black')
+    .call(g => g.selectAll(".tick line")
+        .attr('color','#84B60B')
+        .style("stroke-width","2px"))
+    .call(g => g.selectAll(".tick text")
+        .style("font-size","20px")
+        .attr("x", -20)
+        .attr("dy", 0));
+
+  svg.append("g")
+      .call(xAxis).style('stroke-width','5px')
+      .style('color','black')
+      .call(g => g.selectAll(".tick text") 
+        .style("font-size","20px")
+        .attr("x", 0)
+        .attr("dy", 20))
+    .call(g => g.selectAll(".tick line")
+        .attr('color','#84B60B')
+        .style("stroke-width","2px"))
+
+  svg
+    .append("g")
+    .attr("fill", "steelblue")
+    .selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("x", (d, i) => x(i))
+    .attr("y", (d,i) => y(d.price) )
+    .attr("height", (d) => (height- margin.bottom) - y(d.price))
+    .attr("width", x.bandwidth());
+       
+
+  return svg.node();
+} 
+
+
+/* coordinate */
+all_widths=[window.innerWidth, window.screen.width, document.documentElement.clientWidth, document.getElementsByTagName('body')[0].clientWidth]
+all_height=[window.innerHeight, window.screen.height, document.documentElement.clientHeight, document.getElementsByTagName('body')[0].clientHeight]
+
+shw=0
+fixed_height = 500
+
+
+dms={if (all_widths[shw] < 600) {
+    // mobile
+    return   [1.2 * all_widths[shw], .8 * fixed_height]
+}
+if (all_widths[shw] > 900){
+    // desktop
+    return [.5 * all_widths[shw],.7 *fixed_height]
+}
+else{
+    // tablet
+    return [.8 * all_widths[shw],.55 *fixed_height]
+}
+}
+width=dms[0]
+height=dms[1]
+
+/* height = 300 */
+
+
+margin = ({top:30, right:30, bottom:60, left:60})
+
+
+// x = d3.scaleTime()
+//     .domain(d3.extent(data, d => d.new_data))
+//     .range([margin.left, width - margin.right])
+x = d3
+  .scaleBand()
+  .domain(d3.range(data.length))
+  .range([margin.left, width - margin.right]).padding(.35)
+
+
+y = d3.scaleLinear()
+    .domain([0, d3.max(d3.extent(data.map(d=>d.price)))]).nice()
+    .range([height - margin.bottom, margin.top])
+
+xAxis = g => g
+    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x).ticks(width / 120).tickSizeOuter(0))
+
+yAxis = g => g
+    .attr("transform", `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y).ticks(5).tickSizeOuter(0)
+    )
+    // .call(g => g.select(".domain").remove())
+    // .call(g => g.select(".tick:last-of-type text").clone()
+    //     .attr("x", 3)
+    //     .attr("text-anchor", "start")
+    //     .attr("font-weight", "bold")
+    //     .text(data.y))
+
+
+
+
+
+d3 = require("d3@5", "d3-delaunay@5")
+
+
+
+
+grid = (g) =>
+  g
+    .attr("stroke", "currentColor")
+    
+    .attr('color','#84B60B')
+    .attr('stroke-dasharray','8,8')
+    .style("stroke-width",".6px")
+    .call((g) =>
+      g
+        .append("g")
+        .selectAll("line")
+        .data(y.ticks())
+        .join("line")
+        .attr("y1", (d) => 0.5 + y(d))
+        .attr("y2", (d) => 0.5 + y(d))
+        .attr("x1", margin.left)
+        .attr("x2", width - margin.right)
+    )
+
+
+/* -------------------------------------------------------------------------- */
+/*								   tooltip								  */
+/* -------------------------------------------------------------------------- */
+///
+    tooltip = {
+        chart
+    const tooltip = d3.select("body").append("div")
+    .attr("class", "svg-tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .text("I'm a circle!");
+
+    
+    data.map((d,i)=> 
+    d3.select("#circle"+i)
+        .on("mouseover", function(){
+            d3.select(this)
+            .attr('r', radius * 3);
+            tooltip.text(d.date);
+        return tooltip.style("visibility", "visible");
+        })
+        .on("mousemove", function(){		
+        return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+        })
+        .on("mouseout", function(){
+            d3.select(this)
+            .attr('r', radius)
+        return tooltip.style("visibility", "hidden");
+        })
+        .on("click", function() {
+        setStyle(d3.select(this));
+        make_stuff(d3.select(this))
+        d3.event.stopPropagation();
+        
+        
+         
+    }).transition().delay(1500).duration(125*i).ease(d3.easeExpInOut).attr('r', radius*2).transition().duration(125*i).ease(d3.easeExpInOut).attr('r', radius))
+    
+    
+    ; 
+    }
+
+
+    function setStyle(selection) {  
+    selection.attr("fill", "magenta").attr("opacity", "1");
+    }
+
+    styles = html`
+    <style>
+
+    .svg-tooltip {
+        background: rgba(69,77,93,.9);
+        border-radius: .3rem;
+        color: #fff;
+        display: block;
+        font-size: 11px;
+        max-width: 320px;
+        padding: .2rem .4rem;
+        position: absolute;
+        text-overflow: ellipsis;
+        white-space: pre;
+        z-index: 300;
+        visibility: hidden;
+    }
+    </style>`
+
+    function tweenDash() {
+    const l = this.getTotalLength(),
+        i = d3.interpolateString("0," + l, l + "," + l);
+    return function(t) { return i(t) };
+    }
+
+    
+
+    function make_stuff(selection) {
+
+
+    const g = d3.select(".anchor").append("div").attr('class','blocker')
+    .style("position", "absolute")
+    .style("opacity", "0")
+    .style("top", "-10px")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    .html(
+        `<div style="background:black; width:${width*2}px;height:${height*2}px" onclick='hidePopup()'></div> 
+        `);
+
+    g.transition().duration(350).ease(d3.easeExpInOut).style("opacity", "0")
+    
+    console.log(selection.attr('cx'));
+
+    
+    
+    console.log(d3.select('#chart').node().getBBox().width-300);
+    
+    function position_x() {
+        
+    if (all_widths[0] <600) {
+    return "-5%"
+    }
+    else {
+        return Math.min(selection.attr('cx')-100,d3.select('#chart').node().getBBox().width-200) + 'px';
+    }
+    
+    }
+   function position_y() {
+        
+    if (all_widths[0] <600) {
+        d3.select(".big-card").style('transform','scale(.8)')
+    return Math.min(selection.attr('cy')-100,100) +'px'
+    
+    }
+    else{
+        return Math.min(selection.attr('cy')-100,d3.select('#chart').node().getBBox().height-100) + 'px'
+    
+    }
+    
+    }    
+    const w_new_pos = position_x();
+    
+    const h_new_pos=position_y();
+    
+    
+    
+    
+    
+    
+    d3.select(".big-card").style('opacity','0').style('display','flex').style('z-index','1000')
+    .transition().duration(1250).ease(d3.easeExpInOut).style("opacity", "1").style("left",w_new_pos).style("top",h_new_pos)
+
+}

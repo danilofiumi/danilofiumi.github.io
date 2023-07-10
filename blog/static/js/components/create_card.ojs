@@ -1,0 +1,56 @@
+
+/// data
+search= {return (await fetch("magazine.json")).json();} 
+
+image=search.map(d => d.image)
+title=search.map(d => d.title)
+link=search.map(d => d.link)
+tag=search.map(d => d.tag)
+testuale=search.map(d => d.text)
+time=search.map(d => d.time)
+
+
+
+
+function create_card(el) {
+    
+return html`
+        
+        <a href="${link[el]}">
+      <div class="card-image">
+        <figure class="image is-4by3">
+          <img class="terza_immagine" src="${image[el]}" alt="Placeholder image">
+        </figure>
+      </div>
+    </a>
+      <div class="card-content">
+        <div class="media">
+          <div class="media-content pl-2 pr-2">
+            <p class="title is-4">${title[el]}</p>
+            <p class="subtitle is-6">${tag[el]}</p>
+          </div>
+        </div>
+        <div class="content pl-2 pr-2">
+            ${testuale[el]}
+          <br>
+          
+        </div>
+        <div class="columns pl-3 pr-3">
+          <div class="column">
+            <small style="text-align: left !important;"> ${time[el]} di lettura</small>
+          </div>
+          <div class="column has-text-right">
+            <small style="text-align: right !important;"> <a href="${link[el]}"> Leggi di più &rarr; </a></small>
+          </div>
+
+        </div>
+
+        
+      </div>
+    
+`
+}
+
+card1=create_card(0)
+card2=create_card(1)
+card3=create_card(2)

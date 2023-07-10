@@ -1,0 +1,498 @@
+viewof flavor = Inputs.radio(["Founder","Technology Professionals"])
+flavor
+
+strp={if (flavor=='Founder') {
+    return false    
+}
+if (flavor=='Technology Professionals'){
+    return true    
+}
+}
+
+
+viewof founder=html`
+      <input type="radio" id="founder" name="contact" value="founder" required />
+      
+    
+` 
+
+viewof pro=html`
+      <input type="radio" id="techpro" name="contact" value="techpro" required />
+      
+    
+` 
+founder==undefined
+pro==undefined
+
+
+
+topline=html`
+
+    <div class="columns is-vcentered is-centered has-text-centered-mobile mb-6 donate-now">
+      <div class="column is-4 is-inline-flex-desktop has-text-centered-mobile ">
+        ${viewof founder}
+        <label class='lbl1 has-text-centered ' for="contactChoice1">Founder <br>
+         </label>
+      </div>
+      <div class="column is-offset-2 is-4 is-inline-flex-desktop has-text-centered-mobile has-margin-top-mobile ">
+        ${viewof pro}
+        <label class='lbl1 has-text-centered '  for="contactChoice1">Technology <br class='is-hidden-mobile'> Professionals</label>
+      </div>
+      
+    </div>
+    
+`
+
+
+viewof nome= html`
+    <input class="input nome" type="text" placeholder="Inserisci il tuo nome" required>
+`
+viewof cognome= html`
+  <input class="input nome" type="text" placeholder="Inserisci il tuo cognome">
+`
+
+md`linea `
+
+
+
+line=html`
+
+    <div class="columns is-vcentered is-centered has-text-right-mobile mb-6">
+      <div class="column is-5 is-inline-flex">
+      <label class='lbl' style=""> Nome </label>
+      ${viewof nome}
+      </div>
+      <div class="column is-offset-1 is-5 is-inline-flex">
+      <label class='lbl'>Cognome</label>
+      ${viewof cognome}
+      </div>
+      
+    </div>
+    
+`
+
+viewof nome_startup= html`
+    <input class="input nome" type="text" style="width: 100% !important;" placeholder="es: Twitter">
+`
+
+line1=html`
+    <div class="columns is-vcentered is-centered has-text-centered detached mb-6">
+      <div class="column is-8 is-inline-flex">
+      <label class='lbl2' style=""> Nome della Startup </label>
+      ${viewof nome_startup}
+      </div>
+      
+    </div>
+`
+
+line2=html`
+    <div class="columns is-vcentered is-centered has-text-right-desktop has-text-centered-mobile   mb-6">
+      <div class="column is-9-desktop is-inline-flex-desktop">
+      
+      <label class='lbl3' style=""> La startup opera principalmente nel settore  </label>
+      ${viewof autocmpls1}
+      </div>
+      
+    </div>
+`
+
+md`test`
+/* topline.children[0].children[1].checked 
+topline.children[0].children[0].children[0].checked=true */
+/* topline.children[1].children[0].checked=true */
+/* html`
+${line1}    
+` */
+
+
+
+
+
+
+viewof costituita= html`
+    <select class=' dropdown fixed' name="costituita" >
+    <option value=""></option>
+    <option >Si</option>
+    <option >No</option>
+</select>
+`
+
+viewof componenti= html`
+<select class='dropdown fixed' name="componenti" id="pet-select">
+    <option value=""></option>
+    <option >1</option>
+    <option >2</option>
+    <option >3</option>
+    <option >4</option>
+    <option >5</option>
+    <option >6 o superiori</option>
+</select>
+`
+
+
+viewof tech= html`
+<select class='dropdown fixed' name="tech" id="pet-select">
+    <option value=""></option>
+    <option >AI</option>
+    <option >AR</option>
+    <option >Entrambe</option>
+    <option >Nessuna</option>
+    
+</select>
+`
+line3=html`
+    <div class="columns is-vcentered is-centered has-text-left mb-6">
+      <div class="column is-9 is-inline-flex">
+      
+      ${viewof costituita}
+      <label class='lbl4' style=""> La startup è costituita?</label>
+      </div>
+      
+    </div>
+    <div class="columns is-vcentered is-centered has-text-left mb-6">
+      <div class="column is-9 is-inline-flex">
+      
+      ${viewof componenti}
+      <label class='lbl4' style=""> Quanti componenti ha la startup?</label>
+      </div>
+      
+    </div>
+    <div class="columns is-vcentered is-centered has-text-left mb-6">
+      <div class="column is-9 is-inline-flex">
+      
+      ${viewof tech}
+      <label class='lbl4' style=""> Quali tra queste tecnologie vengono usate?</label>
+      </div>
+      
+    </div>
+`
+
+
+
+
+chose
+viewof name = Inputs.text({label: "Nome", placeholder: "What’s your name?"})
+viewof surname = Inputs.text({label: "Cognome", placeholder: "What’s your surname?"})
+viewof birthday = Inputs.date({label: "Birthday"})
+industies = ["Servizi amministrativi", "Pubblicità", "Agricoltura e Farming","Realtà aumentata", "App", "Intelligenza artificiale", "Biotecnologie", "Abbigliamento e confezioni", "Commercio/E-Commerce e shopping", "Community e Lifestyle", "Elettronica di consumo", "Beni di consumo", "Contenuti ed editoria", "Dati e Analytics", "Design", "Istruzione/Educazione", "Energia", "Eventi", "Servizi finanziari", "Cibo e bevande", "Giochi", "Governo e forze armate", "Hardware", "Health Care", "Tecnologia dell'informazione", "Servizi Internet", "Prestiti e investimenti", "Produzione", "Media e intrattenimento", "Messaggistica e telecomunicazioni", "Musica e audio", "Risorse naturali","Cybersecurity", "Navigazione e cartografia",  "Pagamenti", "Piattaforme", "Privacy e sicurezza", "Servizi professionali", "Immobiliare", "Vendite e marketing", "Scienza e ingegneria", "Software", "Sport", "Sostenibilità", "Trasporti", "Viaggi e turismo", "Video","Altro"]
+viewof startup = Inputs.text({label: "Nome della Startup", placeholder: "",disabled:strp})
+
+viewof autocmpls= {if (strp) {
+
+ return autoSelect({
+  options: industies.map(d => d),
+  placeholder: "Search for a Industry",
+  disabled:true
+
+})     
+}
+else{
+    return autoSelect({
+  options: industies.map(d => d),
+  placeholder: "Search for a Industry",
+  
+    })
+
+}}
+
+/* 
+viewof other={if (autocmpls1=='Altro') {
+
+  return html`
+    <input class="input" type="text" placeholder="Text input">
+  `
+}}
+other */
+
+viewof slider= html`
+    
+    <input type="range" min="50000" max="250000" value="100000" step="10000" class="slider " id="myRange">
+`
+
+formatter = new Intl.NumberFormat('it-IT', {
+  style: 'currency',
+  currency: 'EUR',
+
+  // These options are needed to round to whole numbers if that's what you want.
+  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
+
+line4=html`
+        <div class="columns is-vcentered is-centered has-text-centered mb-6">
+      <div class="column is-9 is-inline-flex">
+      <label class='lbl5' style=""> Funding need? </label>
+      ${viewof slider}
+      <label class='lbl4' style=""> ${(formatter.format(slider))}</label>
+      </div>
+      
+    </div>
+    </div>
+`
+
+
+slider 
+
+
+viewof textarea=html`
+      <textarea class="textarea" rows="10" placeholder="(max 2000 parole)"></textarea>
+`
+textarea
+
+line5=html`
+        <div class="columns is-vcentered is-centered has-text-left mb-6 is-marginless-mobile">
+      <div class="column is-9">
+      <label class='lbl2' style=""> Descrivi il tuo Progetto: </label><br>
+      ${viewof textarea}
+
+      </div>
+      
+    </div>
+    </div>
+`
+
+
+
+
+viewof funding = Inputs.range([50000, 250000], {step: 10000, label: "Funding Need?",format})
+
+viewof bio = Inputs.textarea({label: "Descrizione del progetto", placeholder: "What’s your story?",disabled:strp})
+
+/* ------------------------------------ - ----------------------------------- */
+
+
+
+viewof tech_pro_story = Inputs.textarea({label: "Parlaci di te e dei tuoi progetti", placeholder: "What’s your story?",disabled:!strp})
+viewof expertise = Inputs.text({label: "Qual’è la tua area di expertise?", placeholder: "Qual’è la tua area di expertise?",disabled:!strp})
+
+
+
+viewof autocmpls1= {if (strp) {
+
+ return autoSelect({
+  options: industies.map(d => d),
+  placeholder: "Seleziona l'Industry",
+  
+
+})     
+}
+if (!strp){
+    return autoSelect({
+  options: industies.map(d => d),
+  placeholder: "Seleziona l'Industry",
+  
+    })
+
+}
+else{
+       return autoSelect({
+  options: industies.map(d => d),
+  placeholder: "Search for a Industry",
+  disabled:true
+    }) 
+}}
+ 
+
+viewof experience = Inputs.select([null].concat(['Si','No']), {label: "Hai esperienze pregresse con startup?",disabled:strp})
+viewof cofounder = Inputs.select([null].concat(['Si','No']), {label: "Sei alla ricerca di un co-founder?",disabled:strp})
+
+viewof tech_usage = Inputs.select([null].concat(['AI','AR','Nessuna']), {label: "Quale tra queste tecnologie sai padroneggiare?",disabled:strp})
+
+
+       
+/* -------------------------------------------------------------------------- */
+/*                                 boilerplate                                */
+/* -------------------------------------------------------------------------- */
+
+function autoSelect(config = {}) {
+  const {
+    value,
+    title,
+    description,
+    disabled,
+    autocomplete = "on",
+    placeholder,
+    size,
+    options,
+    list = "options"
+  } = Array.isArray(config) ? { options: config } : config;
+
+  const optionsSet = new Set(options);
+
+  const form = input({
+    type: "text",
+    title,
+    description,
+    attributes: { disabled },
+    action: fm => {
+      fm.value = fm.input.value = value || "";
+      fm.onsubmit = e => e.preventDefault();
+      fm.input.oninput = function(e) {
+        e.stopPropagation();
+        fm.value = fm.input.value;
+        if (!fm.value || optionsSet.has(fm.value))
+          fm.dispatchEvent(new CustomEvent("input"));
+      };
+    },
+    form: html`
+      <form class='has-margin-top-mobile'>
+         <input name="input" type="text" autocomplete="off" 
+          placeholder="${placeholder ||
+            ""}" style="font-size: 1em;" list=${list} class="input">
+          <datalist id="${list}">
+              ${options.map(d =>
+                Object.assign(html`<option>`, {
+                  value: d
+                })
+              )}
+          </datalist>
+      </form>
+      `
+  });
+
+  form.output.remove();
+  return form;
+}
+function input(config) {
+  let {
+    form,
+    type = "text",
+    attributes = {},
+    action,
+    getValue,
+    title,
+    description,
+    format,
+    display,
+    submit,
+    options
+  } = config;
+  const wrapper = html`<div></div>`;
+  if (!form)
+    form = html`<form>
+	<input name=input type=${type} />
+  </form>`;
+  Object.keys(attributes).forEach(key => {
+    const val = attributes[key];
+    if (val != null) form.input.setAttribute(key, val);
+  });
+  if (submit)
+    form.append(
+      html`<input name=submit type=submit style="margin: 0 0.75em" value="${
+        typeof submit == "string" ? submit : "Submit"
+      }" />`
+    );
+  form.append(
+    html`<output name=output style="font: 14px Menlo, Consolas, monospace; margin-left: 0.5em;"></output>`
+  );
+  if (title)
+    form.prepend(
+      html`<div style="font: 700 0.9rem monospace; margin-bottom: 3px;">${title}</div>`
+    );
+  if (description)
+    form.append(
+      html`<div style="font-size: 0.85rem; font-style: monospace; margin-top: 3px;">${description}</div>`
+    );
+  if (format)
+    format = typeof format === "function" ? format : d3format.format(format);
+  if (action) {
+    action(form);
+  } else {
+    const verb = submit
+      ? "onsubmit"
+      : type == "button"
+      ? "onclick"
+      : type == "checkbox" || type == "radio"
+      ? "onchange"
+      : "oninput";
+    form[verb] = e => {
+      e && e.preventDefault();
+      const value = getValue ? getValue(form.input) : form.input.value;
+      if (form.output) {
+        const out = display ? display(value) : format ? format(value) : value;
+        if (out instanceof window.Element) {
+          while (form.output.hasChildNodes()) {
+            form.output.removeChild(form.output.lastChild);
+          }
+          form.output.append(out);
+        } else {
+          form.output.value = out;
+        }
+      }
+      form.value = value;
+      if (verb !== "oninput")
+        form.dispatchEvent(new CustomEvent("input", { bubbles: true }));
+    };
+    if (verb !== "oninput")
+      wrapper.oninput = e => e && e.stopPropagation() && e.preventDefault();
+    if (verb !== "onsubmit") form.onsubmit = e => e && e.preventDefault();
+    form[verb]();
+  }
+  while (form.childNodes.length) {
+    wrapper.appendChild(form.childNodes[0]);
+  }
+  form.append(wrapper);
+  return form;
+}
+d3format = require("d3-format@1")
+nome
+cognome
+nome_startup
+autocmpls1
+tech
+costituita
+componenti
+slider
+textarea
+
+ submit = {
+    if ((nome!='')&(cognome!='')&(nome_startup!='')&(autocmpls1!='')&(tech!='')&(costituita!='')&(componenti!='')&(slider!='')&(textarea!='')) {
+        return html`
+<div class="buttons is-centered mb-6">
+    <a href="mailto:info@archangeladventure.it?subject=Riepilogo dati inseriti&body=${body}" class="button is-primary" id="mailto" >
+      <strong>Entra in contatto</strong>
+    </a>
+</div>    
+`
+    }
+    else{
+        return html`
+                <div class="buttons is-centered mb-6 ">
+                <p style="color: red;"> Per proseguire completa tutte le informazioni</p>
+                
+                </div>
+        `
+    }
+}
+ 
+
+
+
+
+
+html
+    
+
+body=`
+
+Grazie per aver presentato il tuo progetto!%0D%0A
+%0D%0A
+Dettaglio dati inseriti nel form%0D%0A
+%0D%0A
+Nome: ${nome}%0D%0A
+Cognome: ${cognome}%0D%0A
+Startup: ${nome_startup}%0D%0A
+Industry: ${autocmpls1}%0D%0A
+Tecnologia Usata: ${tech}%0D%0A
+Startup già costituita: ${costituita}%0D%0A
+Numero Componenti: ${componenti}%0D%0A
+Funding Need: ${slider}%0D%0A
+Descrizione Progetto: ${textarea}%0D%0A
+%0D%0A
+NB: ricorda di allegare il pitch deck a questa mail e mandarla senza fare modifiche %0D%0A
+
+`
+
+
+
+

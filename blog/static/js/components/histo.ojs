@@ -1,0 +1,182 @@
+md`
+# Initialize Plot
+<svg id="hist"></svg>
+`
+// data = d3.csv("http://127.0.0.1:5500/web_article/app/static/js/components/datasets/episodes.csv",d3.autoType) 
+data = d3.csv("./static/assets/datasets/episodes.csv",d3.autoType) 
+ 
+viewof bins = Inputs.range([0, 65], {step: 5, })
+
+mutable replay=0
+header={
+    return document.getElementById("hist");
+}
+
+
+subject = { 
+  const observer = new IntersectionObserver(entries => {
+    const entry = entries.pop();
+    // console.log('observer:', observer);
+    if ((entry.intersectionRatio) > 0) {
+        
+        mutable replay=1
+        observer.unobserve(header)
+    }
+    
+    
+  }, {
+    threshold: Array.from({length: 101}, (_, i) => i / 100)
+  });
+  observer.observe(header);
+  invalidation.then(() => observer.disconnect());
+  
+}
+
+margin = ({top: 20, right: 20, bottom: 40, left: 80})
+histo=histogram(data.map(d=>d.seconds), width, height, bins, false, 18)
+
+
+function histogram (data, width, height, bars=10, log=false, fontSize=18) {
+replay
+  const svg = d3.select('#hist');
+  
+  svg.attr("viewBox", [0, 0, width, height]);
+  svg.selectAll("*").remove();
+  svg.attr('class','histogram')
+
+  const x = d3.scaleLinear()
+    .domain(d3.extent(data).map((d,i) => i && d > 1 ? d+1 : d)).nice()
+    .range([margin.left, width - margin.right])
+  
+  const bins = d3.histogram()
+    .domain(x.domain())
+    .thresholds(x.ticks(bars))
+    .value(d => d)
+    (data)
+    .filter(d => d.length !== 0)
+  const y = log ? 
+    d3.scaleLog() 
+      .domain([0.1, d3.max(bins, d => d.length)]).nice()
+      .range([height - margin.bottom, margin.top]) 
+  : 
+    d3.scaleLinear()
+      .domain([0, d3.max(bins, d => d.length)]).nice()
+      .range([height - margin.bottom, margin.top])
+  
+  const xAxis = g => g
+    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x).tickSizeOuter(0))
+    .style('stroke-width','5px')
+      .style('color','black')
+      .call(g => g.selectAll(".tick text") 
+        .style("font-size","20px")
+        .attr("x", 0)
+        .attr("dy", 20))
+    .call(g => g.selectAll(".tick line")
+        .attr('color','#84B60B')
+        .style("stroke-width","2px")
+        .style("display","2px"))
+  
+  const yAxis = g => g
+    .attr("transform", `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y).ticks(5).tickSizeOuter(0))
+.style('stroke-width','5px') 
+      .style('color','black')
+    .call(g => g.selectAll(".tick line")
+        .attr('color','#84B60B')
+        .style("stroke-width","2px"))
+    .call(g => g.selectAll(".tick text")
+        .style("font-size","20px")
+        .attr("x", -20)
+        .attr("dy", 5));
+  
+  svg.append("g")
+      .attr("fill", "#0E36AD")
+    .selectAll("rect")
+    .data(bins)
+    .join("rect")
+      .attr("x", d => x(d.x0) + 1)
+      .attr("width", d => Math.max(0, x(d.x1) - x(d.x0) - 1))
+      .attr("y", d => y(d.length)).transition().duration(1250).ease(d3.easeExpInOut)
+      .attr("height", d => y.range()[0] - y(d.length));
+  
+  svg.append("g")
+      .call(xAxis)
+   
+  
+  svg.append("g")
+      .call(yAxis)
+  
+
+    // const yruler = svg.append('rect')
+    // .attr('x', x(100)) //valore di ancoraggio
+    // .attr('y', margin.top+5)
+    // .attr('height', inner_height)
+    // .attr('width', 10)
+    // .style('fill','none')
+    // .style("stroke",'mediumpurple')
+    // .style("stroke-dasharray",'20')
+    
+    // .attr('class', 'yruler')
+    // .attr('opacity', 1)
+  
+
+
+const yruler = svg.append("line") 
+  .style("stroke", "#FED3D3") 
+  .attr('stroke-width', 5)
+  .attr("x1", x(100)) //valore di ancoraggio asse x
+  .attr("y1", y(0)) 
+  .attr("x2", x(100)) //valore di ancoraggio asse x
+  .attr("y2", y(12500)) //altezza della linea
+  .style("stroke-dasharray", ("12, 12"))
+
+
+  return svg.node()
+}
+
+
+d3 = require("d3@5", "d3-delaunay@5")
+md`ff`
+Math.max(...fetched.map((d) => d.price))
+
+/* coordinate */
+all_widths=[window.innerWidth, window.screen.width, document.documentElement.clientWidth, document.getElementsByTagName('body')[0].clientWidth]
+all_height=[window.innerHeight, window.screen.height, document.documentElement.clientHeight, document.getElementsByTagName('body')[0].clientHeight]
+inner_height = height - margin.top - margin.bottom
+inner_width = width + margin.left - margin.right
+shw=0
+fixed_height = 500
+
+
+// dms={if (all_widths[shw] < 600) {
+//     // mobile
+//     return   [1.2 * all_widths[shw], .8 * fixed_height]
+// }
+// if (all_widths[shw] > 900){
+//     // desktop
+//     return [.5 * all_widths[shw],.7 *fixed_height]
+// }
+// else{
+//     // tablet
+//     return [.8 * all_widths[shw],.55 *fixed_height]
+// }
+// }
+
+dms={if (all_widths[shw] < 600) {
+    // mobile
+    return   [1.2 * all_widths[shw], .8 * fixed_height]
+}
+if (all_widths[shw] > 900){
+    // desktop
+    return [.4 * all_widths[shw],.7 *fixed_height]
+}
+else{
+    // tablet
+    return [.8 * all_widths[shw],.55 *fixed_height]
+}
+}
+width=dms[0]
+height=dms[1]   
+
+

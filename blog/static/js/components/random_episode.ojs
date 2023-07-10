@@ -1,0 +1,54 @@
+f=html`
+          <audio id="main_audio" src="https://media.rds.it/web/wp-audio/file_radio_427285672_2023-06-13_09-57_mentana.mp3"></audio>
+`
+
+// data = d3.csv("http://127.0.0.1:5500/web_article/app/static/assets/datasets/episodes.csv",d3.autoType) 
+data = d3.csv("./static/assets/datasets/episodes.csv",d3.autoType) 
+
+
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
+
+
+random_episode=data[getRandomInt(data.length) ]['audio_src']
+audio={f
+    return document.getElementById("main_audio");}
+
+// audio.getAttribute('src')
+audio.src=random_episode
+
+
+
+/* -------------------------------------------------------------------------- */
+/*                              resize main image                             */
+/* -------------------------------------------------------------------------- */
+main_image=document.getElementById("main_image");
+
+
+
+/* coordinate */
+all_widths=[window.innerWidth, window.screen.width, document.documentElement.clientWidth, document.getElementsByTagName('body')[0].clientWidth]
+all_height=[window.innerHeight, window.screen.height, document.documentElement.clientHeight, document.getElementsByTagName('body')[0].clientHeight]
+
+shw=0
+fixed_height = 500
+
+
+
+dms={if (all_widths[shw] < 600) {
+    // mobile
+    main_image.src='https://raw.githubusercontent.com/transferitore/just_pic/main/politics/main_image_small.png'
+    main_image.style.height='100%'
+    return   [1.2 * all_widths[shw], .8 * fixed_height]
+}
+if (all_widths[shw] > 900){
+    // desktop
+    return [.4 * all_widths[shw],.7 *fixed_height]
+}
+else{
+    // tablet
+    return [.8 * all_widths[shw],.55 *fixed_height]
+}
+}

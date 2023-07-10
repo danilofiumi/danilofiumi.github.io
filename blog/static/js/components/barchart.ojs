@@ -1,0 +1,414 @@
+///
+md`# Template in D3`
+html`
+
+<svg id="bar" ></svg>
+
+`;
+md`## 1. access & parse data`
+/* -------------------------------------------------------------------------- */
+/*									chart								   */
+/* -------------------------------------------------------------------------- */
+
+/// data
+
+data = [
+    { name: 'Draghi', y: 386,link:"https://raw.githubusercontent.com/transferitore/just_pic/main/politics/drg.png"},
+    { name: 'Putin', y: 335 ,link:"https://raw.githubusercontent.com/transferitore/just_pic/main/politics/ptn.png"},
+    { name: 'Conte', y: 262 ,link:"https://raw.githubusercontent.com/transferitore/just_pic/main/politics/cnt.png" },
+    { name: 'Meloni', y: 234 ,link:"https://raw.githubusercontent.com/transferitore/just_pic/main/politics/mln.png" },
+    { name: 'Zelensky', y: 183 ,link:"https://raw.githubusercontent.com/transferitore/just_pic/main/politics/zln.png" },
+    { name: 'Salvini', y: 152 ,link:"https://raw.githubusercontent.com/transferitore/just_pic/main/politics/slv.png" },
+    { name: 'Berlusconi', y: 125 ,link:"https://raw.githubusercontent.com/transferitore/just_pic/main/politics/brl.png" },
+    { name: 'Biden', y: 112 ,link:"https://raw.githubusercontent.com/transferitore/just_pic/main/politics/bdn.png" },
+    { name: 'Mattarella', y: 110 ,link:"https://raw.githubusercontent.com/transferitore/just_pic/main/politics/mtr.png"},
+    { name: 'Renzi', y: 102,link:"https://raw.githubusercontent.com/transferitore/just_pic/main/politics/rnz.png" }
+];
+
+md`## 2. access metrics`
+
+
+var_x = 'name'
+var_y = "y"
+mutable replay=0
+header={
+    return await document.getElementById("bar");
+}
+
+
+
+subject = { 
+  const observer = new IntersectionObserver(entries => {
+    const entry = entries.pop();
+     console.log('entries:', entry);
+    // console.log('observer:', observer);
+    if ((entry.intersectionRatio) > 0) {
+        
+        mutable replay=1
+        observer.unobserve(header)
+    }
+    
+    
+  }, {
+    threshold: Array.from({length: 101}, (_, i) => i / 100)
+  });
+  observer.observe(header);
+  invalidation.then(() => observer.disconnect());
+  
+}
+
+getMetricType(data.map((d) => d.x))
+
+xAccessor = getMetricAccessor(getMetricType(data.map((d) => d[var_x])), var_x)
+
+yAccessor = getMetricAccessor(getMetricType(data.map((d) => d[var_y])), var_y)
+
+ 
+/// scales
+md`## 4. create scales`
+
+xScale = d3
+  .scaleBand()
+  .domain(d3.range(data.length))
+  .range([0, dms.boundedWidth]).padding(.35)
+
+// xScale = d3 
+//   .scaleLinear()
+//   .domain([0, d3.max(d3.extent(data, xAccessor))])
+//   .range([0, dms.boundedWidth]) 
+
+yScale = d3
+  .scaleLinear()
+  .domain([0, d3.max(d3.extent(data, yAccessor))])
+  .nice()
+  .range([dms.boundedHeight, 0])
+
+/// axis
+x_label=data.map(d=>d.name)
+xAxis = d3.axisBottom(xScale).tickFormat((d,i) => x_label[i]).tickSizeOuter(0).ticks(0)
+// xAxis = d3.axisBottom(xScale).ticks(10)
+yAxis = d3.axisLeft(yScale).ticks(10)
+
+function drawAxes(bounds) {
+  bounds.append("g").attr("transform", `translate(0,${dms.boundedHeight})`).call(xAxis)	
+    .style('stroke-width','5px')
+      .style('color','black')
+      .call(g => g.selectAll(".tick text") 
+        .style("font-size","20px")
+        .attr("text-anchor", "start")
+        .attr("x", 0)
+        .attr("dy", 20) 
+        .attr("dx", function(d) {return all_widths[shw] < 1700 ? "1" : "0"}) 
+        .attr("transform", function(d) {
+           return all_widths[shw] < 1700 ? "rotate(45)" : "rotate(0)";
+        })
+        
+         
+        )
+    .call(g => g.selectAll(".tick line")
+        .style("display","none"))
+
+//   bounds.append("g").call(yAxis).call(g => g.select(".domain").remove())
+//     .call(g => g.selectAll(".tick line")
+//         .attr("stroke-opacity", 0.2))
+//     .call(g => g.selectAll(".tick text")
+//         .attr("x", -10)
+//         .attr("dy", 0));
+
+ //bounds.append("g").call(grid);
+}
+
+
+/// marks
+radius=3
+function drawData(bounds, data) {
+
+  bounds
+    .append("g")
+    .attr("fill", "#0E36AD")
+    .selectAll("rect")
+    .data(data)
+    .enter()
+    .append("rect")
+    .attr("id", (d,i)=>"rect"+i)
+    .attr("x", (d, i) => xScale(i))
+    .attr("y", (d) => y(d))
+    .attr("height", (d) => yScale(0) - y(d)).transition().duration(1250).ease(d3.easeExpInOut)
+    .attr("width", xScale.bandwidth())
+    .style("filter" ,"url(#shadow1)")
+
+  bounds
+    .append("g")
+    .selectAll("text")
+    .data(data)
+    .enter()
+    .append("text")
+    .attr("class", "label")
+    
+    .attr("x", (d, i) => xScale(i))
+    .style("opacity","0")
+    .attr("y", (d) => y(d))
+    .transition().delay(300).duration(1250).ease(d3.easeBounceInOut) 
+    .style("opacity","1") 
+    .attr("dy", "-1em")
+    .attr("dx", ".5em")
+    .text((d) => d.y )
+    
+
+    data.map((d,i)=>
+    bounds
+    .append("svg:image")
+    .attr("id", "image"+i)
+    .attr("x", xScale(i)-20)
+    .attr('y', yScale(d.y)-150)
+    .attr('width', 100)
+    .transition().duration(1250).ease(d3.easeExpInOut)
+    .attr('height', 100)
+    .attr("xlink:href", d.link) 
+    
+    )
+
+
+
+    /* ---------------------------------- defs ---------------------------------- */
+    var defs =    bounds.append("defs");
+
+    //Create a radial Sun-like gradient
+    defs
+        .append("filter").attr('y','-10%').attr('x','-27%').attr('height','140%').attr('width','180%')
+        
+        .attr("id", "shadow1")
+        .append('feDropShadow')
+        .attr('dx','8')
+        .attr('dy','0')
+        .attr('stdDeviation','0')
+        
+
+
+        
+}
+
+md`## 6. draw data`
+
+md`## 7. render the chart`
+
+/// render
+bar={
+    replay
+
+  const svg = d3.select("#bar");
+  // Append our donut container group
+  svg.selectAll("*").remove();
+  svg
+    .attr("viewBox", [0, -120, width, height]) 
+    .attr('class','barchart')
+    .style("overflow", "visible");
+    
+
+  
+
+  drawAxes(svg);
+  drawData(svg, data);
+  
+  
+}
+
+ 
+
+/* coordinate */
+all_widths=[window.innerWidth, window.screen.width, document.documentElement.clientWidth, document.getElementsByTagName('body')[0].clientWidth]
+all_height=[window.innerHeight, window.screen.height, document.documentElement.clientHeight, document.getElementsByTagName('body')[0].clientHeight]
+
+shw=0
+fixed_height = 700
+ 
+
+dms1={if (all_widths[shw] < 600) {
+    // mobile
+    
+    // d3.select("#bar").selectAll(".tick text").attr("transform", "rotate(45)")
+    return   [1.2 * all_widths[shw], .8 * fixed_height]
+}
+if (all_widths[shw] > 900){
+    // desktop
+    return [.5 * all_widths[shw],.7 *fixed_height]
+}
+else{
+    // tablet
+    return [.8 * all_widths[shw],.55 *fixed_height]
+}
+}
+width=dms1[0]
+height=dms1[1]
+
+console.log(width);
+
+/// structure
+md`## 3. draw chart structure`
+
+
+dms = {
+  let dms = {
+    width: width,
+    height: height,
+    marginTop: 30,
+    marginRight: 0,
+    marginBottom: 190,
+    marginLeft: 0,
+  }
+  dms.boundedWidth = dms.width - dms.marginLeft - dms.marginRight
+  dms.boundedHeight = dms.height - dms.marginTop - dms.marginBottom
+  
+  return dms
+}
+
+move = (x=0, y=0) => `translate(x, y)`
+
+md`## 5. create axes`
+
+
+x = d => xScale(xAccessor(d))
+
+y = (d) => yScale(yAccessor(d))
+
+
+
+grid = (g) =>
+  g
+    .attr("stroke", "currentColor")
+    .attr("stroke-opacity", 0.2)
+    .call((g) =>
+      g 
+        .append("g")
+        .selectAll("line")
+        .data(xScale.ticks())
+        .join("line")
+        .attr("x1", (d) => 0.5 + xScale(d))
+        .attr("x2", (d) => 0.5 + xScale(d))
+        .attr("y1", dms.marginTop)
+        .attr("y2", dms.boundedHeight)
+    )
+    .call((g) =>
+      g
+        .append("g")
+        .selectAll("line")
+        .data(yScale.ticks())
+        .join("line")
+        .attr("y1", (d) => 0.5 + yScale(d))
+        .attr("y2", (d) => 0.5 + yScale(d))
+        .attr("x1", 0)
+        .attr("x2", dms.boundedWidth)
+    )
+
+/* -------------------------------------------------------------------------- */
+/*								  utilities								 */
+/* -------------------------------------------------------------------------- */
+///
+    getMetricAccessor = (type, elem) => {
+    if (type == "numerical") return (d) => +d[elem];
+    if (type == "numerical-string") return (d) => +d[elem].replace(/[%,]/g, "");
+    if (type == "datetime") return (d) => new Date(d[elem]);
+    return (d) => d[elem];
+    }
+
+    function getMetricType(
+    values,
+    name = "",
+    dateMetrics = ["time", "date", "datetime"]
+    ) {
+    const uniqueValues = [...new Set(values)]
+        .filter((d) => d || d != "NA")
+        .sort();
+    const uniqueValuesString = uniqueValues.join(",");
+
+    return ["0,1", "0,1,NaN"].includes(uniqueValuesString)
+        ? "categorical"
+        : dateMetrics.includes(name)
+        ? "datetime"
+        : uniqueValues.filter((d) => Number.isFinite(+d)).length >=
+        uniqueValues.length - 1
+        ? "numerical"
+        : uniqueValues.filter((d) => Number.isFinite(+d.replace(/[%,]/g, "")))
+            .length == uniqueValues.length
+        ? "numerical-string"
+        : typeof uniqueValues[0] == "string" &&
+        (uniqueValues[0].startsWith("rgb") || uniqueValues[0].startsWith("#"))
+        ? "color"
+        : uniqueValues.length < 10
+        ? "categorical"
+        : "text";
+    }
+
+    function tweenDash() {
+    const l = this.getTotalLength(),
+        i = d3.interpolateString("0," + l, l + "," + l);
+    return function(t) { return i(t) };
+    }
+
+    d3 = require("d3@5", "d3-delaunay@5")
+
+
+
+/* -------------------------------------------------------------------------- */
+/*								   tooltip								  */
+/* -------------------------------------------------------------------------- */
+///
+    mutable iter=0
+    tooltip = {
+        bar
+    const tooltip = d3.select("body").append("div")
+    .attr("class", "svg-tooltip")
+        .style("position", "absolute")
+        .style("visibility", "hidden")
+        .text("I'm a circle!");
+
+    
+    data.map((d,i)=> 
+    d3.select("#rect"+i)
+        .on("mouseover", function(){
+            // d3.select(this).attr('cursor','pointer')
+ 
+            
+        
+        })
+        .on("mousemove", function(){		
+        return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+        })
+        .on("mouseout", function(){
+            // make_stuff(d3.select(this),0)
+        })
+        .on("click", function() {
+        // setStyle(d3.select(this));
+                   mutable iter=iter+1
+            
+            // make_stuff(d3.select(this),iter)
+        d3.event.stopPropagation();
+        
+        
+         
+    }))
+    ; 
+    }
+
+
+    function setStyle(selection) {  
+    selection.attr("fill", "magenta").attr("opacity", "1");
+    }
+
+    
+    function make_stuff(selection,on) {
+
+        const sl= selection.attr('id').replace('rect','')
+    if (on % 2 == 0) {
+    // console.log(selection.attr('id').substr(4,1));
+    
+    
+    d3.select('#image'+sl).transition().duration(400).ease(d3.easeExpInOut)
+    .attr('width','200').attr('height','200')
+    }
+    else{
+        d3.select('#image'+sl).transition().duration(400).ease(d3.easeExpInOut)
+        .attr('width','35').attr('height','35')    
+    }
+    
+}

@@ -1,0 +1,161 @@
+/* -------------------------------------------------------------------------- */
+/*                                   scroll                                   */
+/* -------------------------------------------------------------------------- */
+
+d3.select('.polit').attr('transform',"translate(2000,100)")
+d3.select('.sal').attr('transform',"translate(2000,100)")
+d3.select('.altr').attr('transform',"translate(2000,100)")
+d3.select('.spt').attr('transform',"translate(2000,100)")
+d3.select('.sc').attr('transform',"translate(2000,100)")
+d3.select('.att').attr('transform',"translate(2000,100)")
+// Customizable
+
+step_size=300 //step to trigger actions
+n_step=8 //#steps
+target=step_size*n_step //treshold to stop scrolling
+
+
+f =html`
+    <div class="scroll-container">
+  <div class="header" id="scrolly" >
+	 <div id="chart"></div>
+	 <h2>My Header</h2>
+	 <p id="text">prova</p>
+  </div>
+</div>
+`
+
+
+window.onscroll = function() {myFunction()};
+header = {f
+    return document.getElementById("scrolly");}
+p =   {return document.getElementById("text")};
+
+// subject = { 
+//   const observer = new IntersectionObserver(entries => {
+//     const entry = entries.pop();
+//      console.log('entries:', entry);
+//     // console.log('observer:', observer);
+//     if ((entry.intersectionRatio * 100).toFixed(0) > 0) {
+//         header.style.height = window.innerHeight+"px";
+//         mutable sticky = header.offsetTop;    
+//         observer.unobserve(header)
+//     }
+    
+    
+//   }, {
+//     threshold: Array.from({length: 101}, (_, i) => i / 100)
+//   });
+//   observer.observe(header);
+//   invalidation.then(() => observer.disconnect());
+  
+// }
+
+header.style.height = window.innerHeight+"px";
+mutable sticky = header.offsetTop;
+mutable value = window.scrollY;
+
+console.log('sticky is '+sticky);
+function myFunction() {
+  if (window.pageYOffset > sticky) {
+    // Sticky
+    header.style.position= "fixed" ;
+    header.style.top= "0" ;
+    header.style.width= "100%" ;
+    
+    mutable value = window.scrollY;
+    p.textContent = `${(value-sticky).toFixed(0)} scroll`
+  } 
+  if ((value-sticky).toFixed(0) >= target) {
+    // Remove Sticky
+    header.style.position= "" ;
+    header.style.top= "" ;
+    header.style.width= "" ;
+    
+    //  Stacked
+    header.style.position="relative";
+    header.style.top = target+ 'px'; 
+    header.style.width = "100%";  
+  }
+  
+  else if (window.pageYOffset < sticky) {
+        // Remove Sticky
+        header.style.position= "" ;
+        header.style.top= "" ;
+        header.style.width= "" ;
+        header.style.top = '0px'; 
+  }
+}
+
+
+
+container={f
+return document.getElementsByClassName("scroll-container")[0]}
+
+
+customScroller={
+  
+    
+    const step0 = () => { 
+    d3.select('.polit').transition().duration(250).ease(d3.easeExpInOut).attr('transform',"translate(2000,1000)")
+    }
+    const step1 = () => { 
+    d3.select('.polit').transition().duration(250).ease(d3.easeExpInOut).attr('transform',"translate(0,0)")
+    d3.select('.sal').transition().duration(250).ease(d3.easeExpInOut).attr('transform',"translate(2000,1000)")
+  }
+
+  const step2 = () => {
+    d3.select('.sal').transition().duration(250).ease(d3.easeExpInOut).attr('transform',"translate(0,0)")
+    d3.select('.att').transition().duration(250).ease(d3.easeExpInOut).attr('transform',"translate(2000,1000)")
+  }
+
+  const step3 = () => {
+    d3.select('.att').transition().duration(250).ease(d3.easeExpInOut).attr('transform',"translate(0,0)")
+    d3.select('.sc').transition().duration(250).ease(d3.easeExpInOut).attr('transform',"translate(2000,1000)")
+  }
+
+const step4 = () => {
+    d3.select('.sc').transition().duration(250).ease(d3.easeExpInOut).attr('transform',"translate(0,0)")
+    d3.select('.spt').transition().duration(250).ease(d3.easeExpInOut).attr('transform',"translate(2000,1000)")
+  }
+
+const step5 = () => {
+    
+    d3.select('.spt').transition().duration(250).ease(d3.easeExpInOut).attr('transform',"translate(0,0)")
+    d3.select('.altr').transition().duration(250).ease(d3.easeExpInOut).attr('transform',"translate(2000,1000)")
+  }
+
+const step6 = () => {
+    d3.select('.altr').transition().duration(250).ease(d3.easeExpInOut).attr('transform',"translate(0,0)")
+  }
+ // Customizable
+  const stepFunctions = {
+    0: step0,
+    1: step1,
+    2: step2,
+    3: step3,
+    4: step4,
+    5: step5,
+    6: step6,
+    7: () => {},
+    8: () => {}
+    
+  }
+    
+    var content_height = document.getElementById('scrolly').offsetHeight
+    // console.log(content_height);
+    const max_value=Object.keys(stepFunctions)[Object.keys(stepFunctions).length-1]
+    
+    container.style.height = (step_size*(max_value))+content_height+"px";
+    document.addEventListener("scroll", (event) => {
+        const currentStep = Math.min(Math.max(Math.floor((window.scrollY-sticky) / step_size),0),max_value)
+        stepFunctions[currentStep]();
+        // console.log(currentStep);
+    
+ });
+  
+}
+
+///
+
+
