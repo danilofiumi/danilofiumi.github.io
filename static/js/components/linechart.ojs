@@ -261,7 +261,7 @@ grid = (g) =>
         return tooltip.style("visibility", "visible");
         })
         .on("mousemove", function(){		
-        return tooltip.style("top", (d3.event.pageY-10)+"px").style("left",(d3.event.pageX+10)+"px");
+        
         })
         .on("mouseout", function(){
             d3.select(this)
@@ -316,8 +316,8 @@ grid = (g) =>
     function make_stuff(selection) {
 
 
-    const g = d3.select(".anchor")
-    const anchor=document.getElementsByClassName("anchor")[0]
+    const g = d3.select(".full-close")
+    const anchor=document.getElementsByClassName("full-close")[0]
     anchor.classList.add(...["blocker"]);
 
 
@@ -356,7 +356,7 @@ grid = (g) =>
         
         
         
-    return Math.min(selection.attr('cy')-100,100) +'px'
+    return Math.min(selection.attr('cy')/6,10) +'px'
     // return "50%"
     
     }

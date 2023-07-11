@@ -30,6 +30,7 @@ line-height: normal;
   font-size: 48pt;
   font-family: "Libre Franklin";
   font-style: normal;
+  font-weight: 600;
   
 }
 /* add a single stroke */
@@ -186,8 +187,10 @@ input[type="range"]::-moz-range-progress {
     }
 
     .blocker {
-
+        display: block !important;
         cursor: pointer;
+        z-index: 10;
+        background-color: #0C1F85;
     }
 
     .card {
