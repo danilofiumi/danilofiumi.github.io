@@ -21,34 +21,3 @@ audio.src=random_episode
 
 
 
-/* -------------------------------------------------------------------------- */
-/*                              resize main image                             */
-/* -------------------------------------------------------------------------- */
-main_image=document.getElementById("main_image");
-
-
-
-/* coordinate */
-all_widths=[window.innerWidth, window.screen.width, document.documentElement.clientWidth, document.getElementsByTagName('body')[0].clientWidth]
-all_height=[window.innerHeight, window.screen.height, document.documentElement.clientHeight, document.getElementsByTagName('body')[0].clientHeight]
-
-shw=0
-fixed_height = 500
-
-
-
-dms={if (all_widths[shw] < 600) {
-    // mobile
-    main_image.src='https://raw.githubusercontent.com/transferitore/just_pic/main/politics/main_image_small.png'
-    main_image.style.height='100%'
-    return   [1.2 * all_widths[shw], .8 * fixed_height]
-}
-if (all_widths[shw] > 900){
-    // desktop
-    return [.4 * all_widths[shw],.7 *fixed_height]
-}
-else{
-    // tablet
-    return [.8 * all_widths[shw],.55 *fixed_height]
-}
-}

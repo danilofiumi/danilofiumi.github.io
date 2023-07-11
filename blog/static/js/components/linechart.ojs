@@ -86,7 +86,7 @@ const xruler = svg.append("line")
         .style("stroke-width","2px"))
     .call(g => g.selectAll(".tick text")
         .style("font-size","20px")
-        .attr("x", -20)
+        .attr("x", function(d) {return all_widths[shw] < 800 ? '-10' : '-20'})
         .attr("dy", 3));
     
   
