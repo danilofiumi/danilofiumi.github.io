@@ -50,8 +50,16 @@ p =   {return document.getElementById("text")};
 //   invalidation.then(() => observer.disconnect());
   
 // }
+// create an Observer instance
+resizeObserver = new ResizeObserver(entries => 
+  console.log('Body height changed:', entries[0].target.clientHeight)
+)
 
-header.style.height = window.innerHeight+"px";
+// start observing a DOM node
+resizeObserver.observe(document.body)
+
+
+header.style.height = entries[0].target.clientHeight+"px";
 mutable sticky = header.offsetTop;
 mutable value = window.scrollY;
 

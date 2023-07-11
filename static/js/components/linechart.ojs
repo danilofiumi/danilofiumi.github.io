@@ -316,17 +316,22 @@ grid = (g) =>
     function make_stuff(selection) {
 
 
-    const g = d3.select(".anchor").append("div").attr('class','blocker')
-    .style("position", "absolute")
-    .style("opacity", "0")
-    .style("top", "-10px")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    .html(
-        `<div style="background:black; width:${width*2}px;height:${height*2}px" onclick='hidePopup()'></div> 
-        `);
+    const g = d3.select(".anchor")
+    const anchor=document.getElementsByClassName("anchor")[0]
+    anchor.classList.add(...["blocker"]);
 
-    g.transition().duration(350).ease(d3.easeExpInOut).style("opacity", "0")
+
+    
+    anchor.onclick = function hidePopup() {
+            const popup = document.querySelector('.big-card');
+
+            document.querySelector('.blocker').classList.remove(...["blocker"]);
+            popup.style['z-index'] = '-1';
+            popup.style['display'] = 'none';
+        }
+    
+
+    g.transition().duration(350).ease(d3.easeExpInOut).style("opacity", "1")
     
     console.log(selection.attr('cx'));
 
