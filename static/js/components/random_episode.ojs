@@ -3,7 +3,8 @@ f=html`
 `
 
 // data = d3.csv("http://127.0.0.1:5500/web_article/app/static/assets/datasets/episodes.csv",d3.autoType) 
-data = d3.csv("./static/assets/datasets/episodes.csv",d3.autoType) 
+// data = d3.csv("./static/assets/datasets/episodes.csv",d3.autoType) 
+import {data} from "./histo.ojs";
 
 
 
