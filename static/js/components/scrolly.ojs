@@ -51,8 +51,13 @@ p =   {return document.getElementById("text")};
   
 // }
 // create an Observer instance
-resizeObserver = new ResizeObserver(entries => 
+resizeObserver = new ResizeObserver(entries => {
   console.log('Body height changed:', entries[0].target.clientHeight)
+  container
+  
+  
+  
+  }
 )
 
 // start observing a DOM node
