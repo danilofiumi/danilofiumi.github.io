@@ -6,7 +6,7 @@ md`
 
 // fetched = d3.csv("./static/datasets/grouped.csv",d3.autoType)
 
-// data = d3.csv("http://127.0.0.1:5500/web_article/app/static/js/components/datasets/grouped.csv",d3.autoType) 
+// data = d3.csv("http://127.0.0.1:5500/web_article/app/static/assets/datasets/grouped.csv",d3.autoType) 
 data = d3.csv("./static/assets/datasets/grouped.csv",d3.autoType) 
 /* df1 = d3.csvParse(await FileAttachment("http://127.0.0.1:5500/observable/test.csv").text()) */
 /* fetched = (await fetch(`http://127.0.0.1:5500/observable/pie.json`)).json() */
@@ -126,8 +126,60 @@ const xruler = svg.append("line")
 .style("stroke-width",'2px')
 .style("filter" ,"url(#shadow)")
 
-   
-   
+
+
+
+
+// const foreign =svg.append("g").attr('class','lbl1')    
+// foreign.append(function() {
+//     var g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+//     g.innerHTML = `
+//         <foreignObject width="500" height="250" style="overflow:visible;">
+//                 <div class="" xmlns="http://www.w3.org/1999/xhtml">
+//                         <div   xmlns="http://www.w3.org/1999/xhtml">
+                    
+//                         <span style="color: black;text-anchor:end; alignment-baseline:central;font-size:24px;font-weight:600;font-family:Inter;
+//                         text-decoration:underline">valore </span>
+                        
+//                     </div>
+//                     </div>
+//         </foreignObject>
+//     `
+//     return g;
+// });
+
+svg.append("text")
+    .attr('class','text_chart')
+    .attr("y",  y(110))    
+    .attr("dy",  5)
+    .transition().duration(1250).ease(d3.easeElastic)
+    .attr("x", x(2022))
+    .attr("text-anchor", "end")
+    .attr("alignment-baseline", "central")
+    .attr("fill", "black")
+    .style("opacity", 1)
+    .style("font-weight",600)
+    .style('font-size', '17px')
+    .style('font-family', 'Inter')
+    .style('text-decoration', 'underline')
+    .text("Click Sui Punti");   
+
+svg.append("text")
+    .attr('class','text_chart')
+    .attr("y",  y(110))
+    .attr("dy",  5)
+    .attr("dx",  25)
+    .transition().duration(1250).ease(d3.easeElastic)
+    .attr("x", x(2022))
+    .attr("text-anchor", "end")
+    .attr("alignment-baseline", "central")
+    .attr("fill", "black")
+    .style("opacity", 1)
+    .style("font-weight",600)
+    .style('font-size', '17px')
+    .style('font-family', 'Inter')
+    
+    .text("->");      
 
 /* ---------------------------------- defs ---------------------------------- */
   var defs =    svg.append("defs");
@@ -245,11 +297,7 @@ grid = (g) =>
 ///
     tooltip = {
         chart
-    const tooltip = d3.select("body").append("div")
-    .attr("class", "svg-tooltip")
-        .style("position", "absolute")
-        .style("visibility", "hidden")
-        .text("I'm a circle!");
+    const tooltip = d3.select("body")
 
     
     data.map((d,i)=> 
@@ -257,8 +305,8 @@ grid = (g) =>
         .on("mouseover", function(){
             d3.select(this)
             .attr('r', radius * 3);
-            tooltip.text(d.rounded_seconds.toFixed(2)+' secondi ');
-        return tooltip.style("visibility", "visible");
+            
+        
         })
         .on("mousemove", function(){		
         
@@ -266,7 +314,7 @@ grid = (g) =>
         .on("mouseout", function(){
             d3.select(this)
             .attr('r', radius)
-        return tooltip.style("visibility", "hidden");
+        
         })
         .on("click", function() {
         setStyle(d3.select(this));
@@ -314,8 +362,10 @@ grid = (g) =>
     
 
     function make_stuff(selection) {
-
-
+        
+    console.log(selection.attr('id').slice(6,7));
+    const numb_elem=selection.attr('id').slice(6,7);
+    
     const g = d3.select(".full-close")
     const anchor=document.getElementsByClassName("full-close")[0]
     anchor.classList.add(...["blocker"]);
@@ -323,8 +373,8 @@ grid = (g) =>
 
     
     anchor.onclick = function hidePopup() {
-            const popup = document.querySelector('.big-card');
-
+            const popup = document.getElementsByClassName("big-card")[numb_elem];
+            console.log(popup);
             document.querySelector('.blocker').classList.remove(...["blocker"]);
             popup.style['z-index'] = '-1';
             popup.style['display'] = 'none';
@@ -341,7 +391,7 @@ grid = (g) =>
     
     function position_x() {
         
-    if (all_widths[0] <800) {
+    if (all_widths[0] <700) {
     return "-2%"
     }
     else {
@@ -351,7 +401,7 @@ grid = (g) =>
     }
    function position_y() {
         
-    if (all_widths[0] <800) {
+    if (all_widths[0] <700) {
 
         
         
@@ -375,11 +425,12 @@ grid = (g) =>
     
     
     
-    d3.select(".big-card").style('opacity','0').style('display','flex').style('z-index','1000')
+    d3.selectAll(".big-card").filter(function (d, i) { return i == numb_elem;})
+    .style('opacity','0').style('display','flex').style('z-index','1000')
     .transition().duration(800).ease(d3.easeExpInOut).style("opacity", "1")
     .style("left",w_new_pos)
     .style("top",h_new_pos)
-    .style('transform', function(d) {return all_widths[shw] < 800 ? 'scale(.8)translate(-5%, -10%)' : 'translate(30%, 30%)'}) 
+    .style('transform', function(d) {return all_widths[shw] < 700 ? 'scale(.8)translate(-5%, -10%)' : 'translate(30%, 30%)'}) 
     
 
 }
