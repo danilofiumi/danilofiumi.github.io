@@ -2,7 +2,7 @@ md`
 # Initialize Plot
 <svg id="chart"></svg>
 `
- 
+
 
 // fetched = d3.csv("./static/datasets/grouped.csv",d3.autoType)
 
