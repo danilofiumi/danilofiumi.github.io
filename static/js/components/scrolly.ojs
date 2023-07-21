@@ -31,25 +31,6 @@ header = {f
     return document.getElementById("scrolly");}
 p =   {return document.getElementById("text")};
 
-// subject = { 
-//   const observer = new IntersectionObserver(entries => {
-//     const entry = entries.pop();
-//      console.log('entries:', entry);
-//     // console.log('observer:', observer);
-//     if ((entry.intersectionRatio * 100).toFixed(0) > 0) {
-//         header.style.height = window.innerHeight+"px";
-//         mutable sticky = header.offsetTop;    
-//         observer.unobserve(header)
-//     }
-    
-    
-//   }, {
-//     threshold: Array.from({length: 101}, (_, i) => i / 100)
-//   });
-//   observer.observe(header);
-//   invalidation.then(() => observer.disconnect());
-  
-// }
 // create an Observer instance
 resizeObserver = new ResizeObserver(entries => {
   console.log('Body height changed:', entries[0].target.clientHeight)
@@ -107,7 +88,7 @@ return document.getElementsByClassName("scroll-container")[0]}
 
 
 customScroller={
-  
+    
     
     const step0 = () => { 
     d3.select('.polit').transition().duration(250).ease(d3.easeExpInOut).attr('transform',"translate(2000,1000)")
