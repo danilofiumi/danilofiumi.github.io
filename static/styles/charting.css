@@ -397,3 +397,16 @@ line-height: normal;
 }
 
 
+.main_evidence *{
+    color: #6207D6 !important;
+text-shadow: 0px 1px 0px  #000;
+}
+
+.short_main_evidence *{
+    color: #0DBCF3 !important;
+text-shadow: 0px 1px 0px  #000;
+}
+.evidence *{
+    color: #20F30D;
+text-shadow: 0px 1px 0px  #000;
+}

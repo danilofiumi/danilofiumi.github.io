@@ -376,7 +376,7 @@ grid = (g) =>
             const popup = document.getElementsByClassName("big-card")[numb_elem];
             console.log(popup);
             document.querySelector('.blocker').classList.remove(...["blocker"]);
-            popup.style['z-index'] = '-1';
+            popup.style['z-index'] = '-10';
             popup.style['display'] = 'none';
         }
     
