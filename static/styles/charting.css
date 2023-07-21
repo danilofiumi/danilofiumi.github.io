@@ -410,3 +410,8 @@ text-shadow: 0px 1px 0px  #000;
     color: #20F30D;
 text-shadow: 0px 1px 0px  #000;
 }
+
+.is-reversed {
+    filter: invert(100%);
+    transition: .2s;
+}
