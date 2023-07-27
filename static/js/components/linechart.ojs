@@ -427,7 +427,7 @@ grid = (g) =>
     
     d3.selectAll(".big-card").filter(function (d, i) { return i == numb_elem;})
     .style('opacity','0').style('display','flex').style('z-index','1000')
-    .transition().duration(800).ease(d3.easeExpInOut).style("opacity", "1")
+    .transition().duration(400).ease(d3.easeExpInOut).style("opacity", "1")
     .style("left",w_new_pos)
     .style("top",h_new_pos)
     .style('transform', function(d) {return all_widths[shw] < 700 ? 'scale(.8)translate(-5%, -10%)' : 'translate(30%, 30%)'}) 

@@ -187,7 +187,8 @@ input[type="range"]::-moz-range-progress {
         display: block !important;
         cursor: pointer;
         z-index: 10;
-        background-color: #0C1F85;
+        background-color: #0c1e8513 !important;
+        margin-top: -1em;
     }
 
     .card {
