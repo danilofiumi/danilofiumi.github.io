@@ -13,7 +13,7 @@ function getRandomInt(max) {
 }
 
 
-random_episode=data[getRandomInt(data.length) ]['audio_src']
+random_episode=data[getRandomInt(100) ]['audio_src']
 audio={f
     return document.getElementById("main_audio");}
 
