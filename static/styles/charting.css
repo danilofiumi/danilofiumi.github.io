@@ -72,6 +72,11 @@ object-fit: cover;
     margin-bottom: 1em;
 }
 @media(min-width: 300px)and (max-width: 767px) {
+
+    .loader-wrapper{
+        padding-left: 5em;
+    }
+
     .corpus *{
         font-size: 12pt !important;
     }
@@ -187,8 +192,9 @@ input[type="range"]::-moz-range-progress {
         display: block !important;
         cursor: pointer;
         z-index: 10;
-        background-color: #0c1e8513 !important;
+        background-color: #ffffff73 !important;
         margin-top: -1em;
+        margin-left: -100em
     }
 
     .card {
@@ -203,7 +209,9 @@ input[type="range"]::-moz-range-progress {
     }
 
     @media(min-width: 300px)and (max-width: 767px) {
-
+        .blocker {
+            margin-left: -1em
+        }
         .text_chart{
             font-size: 24px !important;
         }
@@ -416,3 +424,4 @@ text-shadow: 0px 1px 0px  #000;
     filter: invert(100%);
     transition: .2s;
 }
+
