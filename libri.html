@@ -45,11 +45,13 @@ check my profile on linkedin.com/in/danilofiumi/
 <link rel="icon" href="favicon.png">
 <!--  -->
 <style>
+
     .header {
         font-family: 'Poppins', sans-serif;
         font-weight: 300;
         color: #444;
         line-height: 1.8;
+        margin-top: 1em !important;
     }
     
     .loader {
@@ -94,9 +96,7 @@ check my profile on linkedin.com/in/danilofiumi/
         border-radius: 55px;
     }
     
-    .clip {
-        
-    }
+ 
     
     .clip:hover {
         opacity: 0.5;
@@ -348,6 +348,18 @@ check my profile on linkedin.com/in/danilofiumi/
             z-index: -1;
             width: calc(140%);
             overflow-x: hidden;
+        }
+
+        @media(min-width: 300px)and (max-width: 767px) {
+            .wtmk{
+            
+            
+            width: calc(100% + 160px) !important;
+        }
+        #hamburger{
+            margin-top: 1.1em;
+    }
+        
         }
         
         .wtmk * {

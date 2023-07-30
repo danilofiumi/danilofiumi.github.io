@@ -15,6 +15,26 @@ from vega_datasets import data
 import plotly.express as px
 import plotly.io as pio
 import os 
+##
+from selenium import webdriver
+from selenium.webdriver.support.select import Select
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+
+options = webdriver.FirefoxOptions()
+#options.add_argument('--headless')
+#options.add_argument('--no-sandbox')
+options.add_argument(f'user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36')
+#options.add_argument(f'user-agent={ua.random}')
+options.add_argument('--disable-blink-features=AutomationControlled')
+options.add_argument('--disable-dev-shm-usage')
+# open it, go to a website, and get results
+options.add_argument("start-maximized")
+            
 
 pd.set_option('display.max_rows', 50)
 pd.set_option('display.max_columns', 500)
@@ -70,25 +90,38 @@ urls=["https://www.goodreads.com/"+elem for elem in to_fill.link.tolist()]
 
 
 
+##
+
+
+##
 good_img=[]
 autore=[]
+driver = webdriver.Firefox(options=options)
 for current_page in urls:
-
-    response = get(current_page)
-    if response.status_code == 200:
-        soup = BeautifulSoup(response.text, 'html.parser')
-        
-    else:
-        print('errore nella chiamata')
-        
+    ##
+    #current_page=urls[5]
+    pass
+    
+    driver.get(current_page)
+    try:
+        WebDriverWait(driver, timeout=3).until(lambda d: d.find_element(By.CLASS_NAME,'BookCover'))
+    except Exception:
+        driver.get(current_page)
+        WebDriverWait(driver, timeout=3).until(lambda d: d.find_element(By.CLASS_NAME,'BookCover'))
+        #print(traceback.format_exc())
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    
+    
     cover = soup.find_all('div', attrs={'class':'bookCoverPrimary'})
     try:
         print(cover[0].img["src"])
     except IndexError:
         cover=soup.find_all('div', attrs={'class':'BookCover'})
         
+        
+        
     good_img.append(cover[0].img["src"])
-
+##
 to_fill["good_img"]=good_img
 
 final=to_fill.append(df)
@@ -98,3 +131,4 @@ final.to_csv('libri_letti.csv')
 
 
 final.to_json('libri_letti.json',orient="records")
+##

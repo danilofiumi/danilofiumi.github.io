@@ -75,13 +75,15 @@ ref = [
     { name: 'About', value: '/about.html' ,language:'ITA'},
     { name: 'Progetti', value: '/progetti.html' ,language:'ITA'},
     { name: 'Contacts', value: 'mailto:danilofiumi@hotmail.it?subject=Richiesta di Contatto - Sito Web&amp;body=Ciao Danilo, ti contatto per [...]' ,language:'ITA'},
-    { name: 'Blog', value: '/blog-gfetch.html' ,language:'ITA'},
+    { name: 'Articoli', value: '/blog-gfetch.html' ,language:'ITA'},
+    { name: 'Articoli0', value: '/100secondi-mentana.html' ,language:'ITA'},
     { name: 'Home', value:"/index.html" , language:'ENG'},
     { name: 'Books', value: '/libri.html',language:'ENG' },
     { name: 'About', value: '/about.html' ,language:'ENG'},
     { name: 'Projects', value: '/progetti.html' ,language:'ENG'},
     { name: 'Contacts', value: 'mailto:danilofiumi@hotmail.it?subject= Contact Me - Website &amp;body=Hi Danilo, [...]' ,language:'ENG'},
-    { name: 'Blog', value: '/blog-gfetch.html' ,language:'ENG'}]
+    { name: 'Articles', value: '/blog-gfetch.html' ,language:'ENG'},
+    { name: 'Articoles0', value: '/100secondi-mentana.html' ,language:'ENG'},]
     
 
 
@@ -92,12 +94,23 @@ header={
         var cc= htl.html`<div class="columns has-text-centered-mobile pt-3 pl-6 pr-6 ml-4 mr-4 header" >
         <div class="column pr-4 is-1 has-text-right has-text-left-mobile"><span class="pt-2 pb-2 pl-4 pr-4 " style="backdrop-filter: blur(4px); border-radius:2.89px; background:#2F2C2C;color: white; font-size:9pt !important;">DF</span></div>
         <div id="bandiera" class="active nav column is-1 pl-0-desktop" >${ing}</div>
-        <div class="active nav column is-1 is-offset-4"><a href="${ref.filter(d=>d.language==LNG)[0]['value']}" style="opacity: 0.7; color:black ;font-size:14pt !important;">${ref.filter(d=>d.language==LNG)[0]['name']}</a></div>
-        <div class="active nav column is-1"><a href="${ref.filter(d=>d.language==LNG)[1]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[1]['name']}</a></div>
-        <div class="active nav column is-1"><a href="${ref.filter(d=>d.language==LNG)[2]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[2]['name']}</a></div>
-        <div class="active nav column is-1"><a href="${ref.filter(d=>d.language==LNG)[3]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[3]['name']}</a></div>        
+        <div class="active nav navbar-item column is-1 is-offset-4"><a href="${ref.filter(d=>d.language==LNG)[0]['value']}" style="opacity: 0.7; color:black ;font-size:14pt !important;">${ref.filter(d=>d.language==LNG)[0]['name']}</a></div>
+        <div class="active nav navbar-item column is-1"><a href="${ref.filter(d=>d.language==LNG)[1]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[1]['name']}</a></div>
+        <div class="active nav navbar-item column is-1"><a href="${ref.filter(d=>d.language==LNG)[2]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[2]['name']}</a></div>
+        <div class="active nav navbar-item column is-1"><a href="${ref.filter(d=>d.language==LNG)[3]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[3]['name']}</a></div>        
              
-        <div class="active nav column is-1"><a href="${ref.filter(d=>d.language==LNG)[5]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[5]['name']}</a></div>        
+        <div class="active nav navbar-item has-dropdown is-hoverable column is-1">
+            <a class='navbar-link' style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[5]['name']}</a>
+            <div class="navbar-dropdown">
+                <a class="navbar-item" href="${ref.filter(d=>d.language==LNG)[5]['value']}">
+                Gfetch - Google Docs Websites
+                </a>
+                <a class="navbar-item" href="${ref.filter(d=>d.language==LNG)[6]['value']}">
+                100 Secondi di Mentana
+                </a>
+            </div>
+          
+        </div>   
         
         <div class="active nav column is-1 column is-1 has-text-centered"><a href="${ref.filter(d=>d.language==LNG)[4]['value']}" style="opacity: 0.7;color:black;font-size:14pt"><svg width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0.96875 0.28125H18.0312C18.3942 0.28125 18.6875 0.574512 18.6875 0.9375V14.0625C18.6875 14.4255 18.3942 14.7188 18.0312 14.7188H0.96875C0.605762 14.7188 0.3125 14.4255 0.3125 14.0625V0.9375C0.3125 0.574512 0.605762 0.28125 0.96875 0.28125ZM2.62578 2.51455L9.096 7.54922C9.25596 7.67432 9.47949 7.67432 9.63945 7.54922L16.1117 2.51455C16.1361 2.49572 16.154 2.46973 16.1629 2.44022C16.1718 2.41071 16.1712 2.37916 16.1613 2.34999C16.1513 2.32082 16.1325 2.2955 16.1074 2.27756C16.0824 2.25963 16.0523 2.25 16.0215 2.25H2.71602C2.6852 2.25 2.65515 2.25963 2.63008 2.27756C2.60502 2.2955 2.58619 2.32082 2.57624 2.34999C2.56629 2.37916 2.56572 2.41071 2.5746 2.44022C2.58349 2.46973 2.60138 2.49572 2.62578 2.51455Z" fill="black"/>
@@ -110,13 +123,24 @@ header={
         var cc= htl.html`<div class="columns has-text-centered-mobile pt-3 pl-6 pr-6 ml-4 mr-4 header">
         <div class="column pr-4 is-1 has-text-right has-text-left-mobile"><span class="pt-2 pb-2 pl-4 pr-4 " style="backdrop-filter: blur(4px); border-radius:2.89px; background:#2F2C2C;color: white; font-size:9pt !important;">DF</span></div>
         
-            <div id="bandiera" class=" active nav column is-1 pl-0-desktop" >${ita}</div>
-            <div class="active nav column is-1 is-offset-4"><a href="${ref.filter(d=>d.language==LNG)[0]['value']}" style="opacity: 0.7; color:black ;font-size:14pt !important;">${ref.filter(d=>d.language==LNG)[0]['name']}</a></div>
-            <div class="active nav column is-1"><a href="${ref.filter(d=>d.language==LNG)[1]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[1]['name']}</a></div>
-            <div class="active nav column is-1"><a href="${ref.filter(d=>d.language==LNG)[2]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[2]['name']}</a></div>
-            <div class="active nav column is-1"><a href="${ref.filter(d=>d.language==LNG)[3]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[3]['name']}</a></div>        
-            <div class="active nav column is-1"><a href="${ref.filter(d=>d.language==LNG)[5]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[5]['name']}</a></div>        
-            <div class="active nav column is-1 column is-1 has-text-centered"><a href="${ref.filter(d=>d.language==LNG)[4]['value']}" style="opacity: 0.7;color:black;font-size:14pt"><svg width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <div id="bandiera" class=" active nav  column is-1 pl-0-desktop" >${ita}</div>
+            <div class="active nav navbar-item column is-1 is-offset-4"><a href="${ref.filter(d=>d.language==LNG)[0]['value']}" style="opacity: 0.7; color:black ;font-size:14pt !important;">${ref.filter(d=>d.language==LNG)[0]['name']}</a></div>
+            <div class="active nav navbar-item column is-1"><a href="${ref.filter(d=>d.language==LNG)[1]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[1]['name']}</a></div>
+            <div class="active nav navbar-item column is-1"><a href="${ref.filter(d=>d.language==LNG)[2]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[2]['name']}</a></div>
+            <div class="active nav navbar-item column is-1"><a href="${ref.filter(d=>d.language==LNG)[3]['value']}" style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[3]['name']}</a></div>        
+            <div class="active nav navbar-item has-dropdown is-hoverable column is-1">
+            <a class='navbar-link' style="opacity: 0.7;color:black;font-size:14pt">${ref.filter(d=>d.language==LNG)[5]['name']}</a>
+            <div class="navbar-dropdown">
+            <a class="navbar-item" href="${ref.filter(d=>d.language==LNG)[5]['value']}">
+            Gfetch - Google Docs Websites
+            </a>
+            <a class="navbar-item" href="${ref.filter(d=>d.language==LNG)[6]['value']}">
+            100 Secondi di Mentana
+            </a>
+            </div>
+          
+            </div>        
+            <div class="active nav navbar-item column is-1 column is-1 has-text-centered"><a href="${ref.filter(d=>d.language==LNG)[4]['value']}" style="opacity: 0.7;color:black;font-size:14pt"><svg width="19" height="15" viewBox="0 0 19 15" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M0.96875 0.28125H18.0312C18.3942 0.28125 18.6875 0.574512 18.6875 0.9375V14.0625C18.6875 14.4255 18.3942 14.7188 18.0312 14.7188H0.96875C0.605762 14.7188 0.3125 14.4255 0.3125 14.0625V0.9375C0.3125 0.574512 0.605762 0.28125 0.96875 0.28125ZM2.62578 2.51455L9.096 7.54922C9.25596 7.67432 9.47949 7.67432 9.63945 7.54922L16.1117 2.51455C16.1361 2.49572 16.154 2.46973 16.1629 2.44022C16.1718 2.41071 16.1712 2.37916 16.1613 2.34999C16.1513 2.32082 16.1325 2.2955 16.1074 2.27756C16.0824 2.25963 16.0523 2.25 16.0215 2.25H2.71602C2.6852 2.25 2.65515 2.25963 2.63008 2.27756C2.60502 2.2955 2.58619 2.32082 2.57624 2.34999C2.56629 2.37916 2.56572 2.41071 2.5746 2.44022C2.58349 2.46973 2.60138 2.49572 2.62578 2.51455Z" fill="black"/>
             </svg>
             </a></div>        
